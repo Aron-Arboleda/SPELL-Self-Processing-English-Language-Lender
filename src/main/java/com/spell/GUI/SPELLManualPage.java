@@ -112,7 +112,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener{
                 String inputText = inputTextArea.getText();
                 CaseConverter edit = new CaseConverter(inputText);
                 outputTextArea.setText(edit.upperCase());
-            } else if (e.getSource() == spaceRemoverComboBox) {
+        } else if (e.getSource() == spaceRemoverComboBox) {
                 // TODO
             } else if (e.getSource() == alphabetizerComboBox) {
                 // TODO
