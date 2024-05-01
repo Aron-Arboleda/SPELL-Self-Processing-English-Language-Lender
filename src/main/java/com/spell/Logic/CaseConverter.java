@@ -26,14 +26,12 @@ public class CaseConverter extends SPELLEditor {
         Pattern pattern = Pattern.compile("\\\\b\\\\w+\\\\b", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(text);
 
-        if (matcher.find()) {
-            sbEditor.setCharAt(matcher.end(), Character.toUpperCase(text.charAt(matcher.end())));
-        }
-
+        int begin = 0;
         do {
-            if (matcher.find(matcher.end())) {
-                sbEditor.setCharAt(matcher.end(), Character.toUpperCase(text.charAt(matcher.end())));
+            if (matcher.find(begin)) {
+                sbEditor.setCharAt(matcher.end() + 1, Character.toUpperCase(text.charAt(matcher.end() + 1)));
             }
+            begin = matcher.end() + 1;
         } while(matcher.hitEnd());
 
         text = sbEditor.toString();
