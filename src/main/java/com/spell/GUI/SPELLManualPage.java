@@ -111,7 +111,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener{
             } else if (e.getSource() == casingComboBox) {
                 String inputText = inputTextArea.getText();
                 CaseConverter edit = new CaseConverter(inputText);
-                outputTextArea.setText(edit.upperCase());
+                outputTextArea.setText(edit.camelCasing());
         } else if (e.getSource() == spaceRemoverComboBox) {
                 // TODO
             } else if (e.getSource() == alphabetizerComboBox) {
