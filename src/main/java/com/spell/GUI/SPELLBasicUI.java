@@ -7,12 +7,29 @@ import java.awt.event.*;
 
 class SPELLPage extends JPanel {
     String pageName;
+    private Image backgroundImage;
 
     public SPELLPage(String name, Color background) {
         pageName = name;
         this.setLayout(null);
-        this.setSize(1250, 780);
+        this.setSize(1210, 680);
         this.setBackground(background);
+    }
+
+    public void setImage(Image backgroundImage){
+        this.backgroundImage = backgroundImage;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
+    public static Image newScaledImage(String imageName, int width, int height){
+        ImageIcon image = new ImageIcon(SPELLPage.class.getResource("/" + imageName));
+        ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+        return scaledImage.getImage();
     }
 }
 
@@ -41,6 +58,34 @@ class SPELLButton extends JButton {
             public void mouseExited(MouseEvent e) {
                 button.setBackground(backColor);
             }
+        });
+    }
+}
+
+class OpaqueButton extends JButton {
+    public OpaqueButton(String tooltip) {
+        this.setBorder(new EmptyBorder(0, 0, 0, 0));
+        this.setToolTipText(tooltip);
+        this.setFocusable(false);
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.setBackground(new Color(255,255,255,50));
+        this.setOpaque(false);
+        final OpaqueButton button = this;
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (button.isEnabled()) {
+                    button.setOpaque(true);
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setOpaque(false);
+            }
+
+
+
         });
     }
 }
