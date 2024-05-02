@@ -26,13 +26,14 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
     ArrayList<SPELLComboBox> comboBoxes = new ArrayList<SPELLComboBox>();
     SPELLButton clearButton, copyButton;
 
-    static Image manualEditorBackImage = SPELLPage.newScaledImage("ManualEditorBackground.jpg", 1210, 680);
+    static Image manualEditorBackImage = (new ImageIcon(SPELLPage.class.getResource("/ManualEditorBackground.jpg")))
+            .getImage();
 
     SPELLButton manualButton, manualBackButton;
 
     public SPELLManualPage(String name, Color background) {
         super(name, background);
-        // #region[rgba(80, 87, 75, 0.15)] Manual Page
+
         this.setImage(manualEditorBackImage);
 
         manualBackButton = new SPELLButton("Back", 15, new Color(0x22252A), Color.white, "Return to Previous Page");
@@ -89,7 +90,6 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         this.add(clearButton);
         this.add(copyButton);
 
-        // #endregion
     }
 
     @Override

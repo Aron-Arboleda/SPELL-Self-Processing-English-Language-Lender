@@ -16,15 +16,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 public class SPELLFrame extends JFrame implements ActionListener {
     static SPELLPage homePage, manualPage, automaticPage, iPage;
     ArrayList<SPELLPage> pagesList = new ArrayList<SPELLPage>();
     static SPELLPage ACTIVEPAGE;
-    static Image manualBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/BlackBoardManual.jpg"))).getImage();
-    static Image autoBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/WhiteBoardAutomatic.jpg"))).getImage();
+    static Image manualBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/BlackBoardManual.jpg")))
+            .getImage();
+    static Image autoBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/WhiteBoardAutomatic.jpg")))
+            .getImage();
 
-    OpaqueButton manualButton, automaticButton;
+    OpaqueButton manualButton, automaticButton, instructionsButton;
 
     public SPELLFrame() {
         this.setTitle("SPELL");
@@ -48,8 +49,8 @@ public class SPELLFrame extends JFrame implements ActionListener {
                 homePage.repaint();
             }
         });
-        
         manualButton.addActionListener(this);
+
         automaticButton = new OpaqueButton("Go to Automatic Page");
         automaticButton.setBounds(660, 410, 310, 95);
         automaticButton.addActionListener(this);
@@ -61,23 +62,26 @@ public class SPELLFrame extends JFrame implements ActionListener {
             }
         });
 
+        instructionsButton = new OpaqueButton("Go to Instructions Page");
+        instructionsButton.setBounds(65, 55, 45, 65);
+        instructionsButton.addActionListener(this);
+
         homePage.add(manualButton);
         homePage.add(automaticButton);
+        homePage.add(instructionsButton);
 
         pagesList.add(homePage);
 
         // #endregion
 
-        manualPage = new SPELLManualPage("manualPage", new Color(0xE3E7AF));
+        manualPage = new SPELLManualPage("manualPage", Color.WHITE);
         pagesList.add(manualPage);
 
-        automaticPage = new SPELLAutomaticPage("automaticPage", new Color(0xE3E7AF));
+        automaticPage = new SPELLAutomaticPage("automaticPage", Color.WHITE);
         pagesList.add(automaticPage);
 
-        // #region[rgba(80, 17, 25, 0.15)] Instructions Page
-        iPage = new SPELLPage("iPage", new Color(0xE3E7AF));
+        iPage = new SPELLInstructionsPage("iPage", Color.WHITE);
         pagesList.add(iPage);
-        // #endregion
 
         for (SPELLPage spellPage : pagesList) {
             spellPage.setVisible(false);
@@ -98,6 +102,8 @@ public class SPELLFrame extends JFrame implements ActionListener {
             switchPage(manualPage);
         } else if (e.getSource() == automaticButton) {
             switchPage(automaticPage);
+        } else if (e.getSource() == instructionsButton) {
+            switchPage(iPage);
         }
     }
 

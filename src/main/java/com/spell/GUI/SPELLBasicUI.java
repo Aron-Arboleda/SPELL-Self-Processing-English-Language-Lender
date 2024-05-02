@@ -76,6 +76,7 @@ class OpaqueButton extends JButton {
             public void mouseEntered(MouseEvent e) {
                 if (button.isEnabled()) {
                     button.setOpaque(true);
+                    SPELLFrame.homePage.repaint();
                 }
             }
 
