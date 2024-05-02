@@ -99,12 +99,14 @@ class SPELLLabel extends JLabel {
 }
 
 class SPELLTextArea extends JTextArea {
-    public SPELLTextArea(Font font, Insets margin, Color color) {
+    public SPELLTextArea(Font font, Insets margin, Color backColor, Color foreColor) {
         this.setFont(font);
         this.setMargin(margin);
-        this.setBackground(color);
+        this.setBackground(backColor);
+        this.setForeground(foreColor);
         this.setLineWrap(true);
         this.setWrapStyleWord(true);
+        this.setCaretColor(Color.WHITE);
     }
 }
 
