@@ -12,7 +12,7 @@ public class App extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new SPELLFrame();
+                new SPELLFrame();
             }
         });
     }
