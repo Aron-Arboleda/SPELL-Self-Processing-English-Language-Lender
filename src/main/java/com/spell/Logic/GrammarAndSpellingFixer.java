@@ -10,6 +10,7 @@ import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 
 
+
 public class GrammarAndSpellingFixer extends SPELLEditor {
     
     public GrammarAndSpellingFixer(String textToEdit) {
@@ -19,17 +20,13 @@ public class GrammarAndSpellingFixer extends SPELLEditor {
     public String fixGrammarAndSpelling() {
         StringBuilder sb = new StringBuilder();
         try {
-            // Create a JLanguageTool object for English (British)
+
             Language language = new AmericanEnglish();
             JLanguageTool langTool = new JLanguageTool(language);
 
-            // Uncomment the line below to activate statistical n-gram data
-            // langTool.activateLanguageModelRules(new File("/data/google-ngram-data"));
-
-            // Text to check
             String textToCheck = super.getText();
 
-            // Check the text
+              
             
             List<RuleMatch> matches = langTool.check(textToCheck);
             for (RuleMatch match : matches) {
