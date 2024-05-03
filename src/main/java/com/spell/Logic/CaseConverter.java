@@ -49,12 +49,49 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String sentenceCase() {
-        // ...
-        return "";
+        String text = super.getText();
+        sbEditor.append(text);
+
+        for(int i = 0; i < text.length(); i++){
+            if(text.charAt(i) == '.'){
+                i++;
+                /* while(text.charAt(i) == ' '){
+                    i++;
+                } */
+                sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
+            } else if (text.charAt(i) == '?'){
+                i++;
+               /* while(text.charAt(i) == ' '){
+                    i++;
+                } */
+                sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
+            } else if (text.charAt(i) == '!'){
+                i++;
+                /* while(text.charAt(i) == ' '){
+                    i++;
+                } */
+                sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
+            }
+        }
+
+        text = sbEditor.toString();
+        sbEditor.delete(0, sbEditor.length());
+        return text;
     }
 
     public String capitalizedCase() {
-        // ...
-        return "";
+        String text = super.getText();
+        sbEditor.append(text);
+
+        sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));
+        for(int i = 0; i < sbEditor.length(); i++){
+            if(Character.isWhitespace(sbEditor.charAt(i))){
+                sbEditor.setCharAt(i + 1, Character.toUpperCase(sbEditor.charAt(i + 1)));
+            }
+        }
+
+        text = sbEditor.toString();
+        sbEditor.delete(0, sbEditor.length());
+        return text;
     }
 }

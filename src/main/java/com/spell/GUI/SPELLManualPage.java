@@ -113,7 +113,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
             } else if (e.getSource() == casingComboBox) {
                 CaseConverter edit = new CaseConverter(inputText);
                 if (casingComboBox.getSelectedIndex() == 0) {
-                    outputTextArea.setText(edit.upperCase());
+                    outputTextArea.setText(edit.sentenceCase());
                 } else if (casingComboBox.getSelectedIndex() == 1) {
                     outputTextArea.setText(edit.lowerCase());
                 } else if (casingComboBox.getSelectedIndex() == 2) {
