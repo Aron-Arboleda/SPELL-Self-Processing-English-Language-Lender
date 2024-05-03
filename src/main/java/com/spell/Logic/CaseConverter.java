@@ -52,6 +52,7 @@ public class CaseConverter extends SPELLEditor {
         String text = super.multipleSpaceRemover();
         sbEditor.append(text);
 
+        sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));
         for(int i = 0; i < sbEditor.length(); i++) {
             if ((i != sbEditor.length() - 1) && (sbEditor.charAt(i) == '.' || sbEditor.charAt(i) == '?' || sbEditor.charAt(i) == '!')) {
                 if(Character.isWhitespace(sbEditor.charAt(i + 1))) {

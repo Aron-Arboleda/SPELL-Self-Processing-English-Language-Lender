@@ -113,12 +113,16 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
             } else if (e.getSource() == casingComboBox) {
                 CaseConverter edit = new CaseConverter(inputText);
                 if (casingComboBox.getSelectedIndex() == 0) {
-                    outputTextArea.setText(edit.sentenceCase());
+                    outputTextArea.setText(edit.upperCase());
                 } else if (casingComboBox.getSelectedIndex() == 1) {
                     outputTextArea.setText(edit.lowerCase());
                 } else if (casingComboBox.getSelectedIndex() == 2) {
                     outputTextArea.setText(edit.camelCasing());
-                } 
+                } else if (casingComboBox.getSelectedIndex() == 3) {
+                    outputTextArea.setText(edit.sentenceCase());
+                } else if (casingComboBox.getSelectedIndex() == 4) {
+                    outputTextArea.setText(edit.capitalizedCase());
+                }
             } else if (e.getSource() == spaceRemoverComboBox) {
                 // TODO
             } else if (e.getSource() == alphabetizerComboBox) {
