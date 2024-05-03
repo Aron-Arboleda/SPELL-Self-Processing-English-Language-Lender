@@ -16,6 +16,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 import com.spell.Logic.*;
 
@@ -42,10 +44,17 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
 
         inputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 new Color(0x22252A), Color.WHITE);
-        inputTextArea.setBounds(410, 105, 340, 460);
+
+        JScrollPane inputTextAreaPane = ScrollPaneFactory.newScrollPane(inputTextArea);
+        inputTextAreaPane.setBounds(410, 105, 340, 460);
+        inputTextAreaPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+
         outputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 new Color(0x22252A), Color.WHITE);
-        outputTextArea.setBounds(805, 105, 340, 460);
+
+        JScrollPane outputTextAreaPane = ScrollPaneFactory.newScrollPane(outputTextArea);
+        outputTextAreaPane.setBounds(805, 105, 340, 460);
+        outputTextAreaPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         JPanel comboBoxesContainer = new JPanel();
         comboBoxesContainer.setLayout(new BoxLayout(comboBoxesContainer, BoxLayout.Y_AXIS));
@@ -84,8 +93,8 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         comboBoxesContainer.add(alphabetizerComboBox);
 
         this.add(manualBackButton);
-        this.add(inputTextArea);
-        this.add(outputTextArea);
+        this.add(inputTextAreaPane);
+        this.add(outputTextAreaPane);
         this.add(comboBoxesContainer);
         this.add(clearButton);
         this.add(copyButton);

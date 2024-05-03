@@ -20,10 +20,28 @@
 
   <dependencies>
     <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.3.5</version>
+    </dependency>
+
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>4.5.0-M1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.languagetool</groupId>
+        <artifactId>language-en</artifactId>
+        <version>6.4</version>
     </dependency>
 
     <dependency>
@@ -34,8 +52,29 @@
 
     <dependency>
         <groupId>org.languagetool</groupId>
-        <artifactId>language-en</artifactId>
+        <artifactId>languagetool-gui-commons</artifactId>
         <version>6.4</version>
+    </dependency>
+
+    <!-- 
+    <dependency>
+        <groupId>org.languagetool</groupId>
+        <artifactId>languagetool-tools</artifactId>
+        <version>6.4</version>
+    </dependency> -->
+
+
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.13</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>5.11.0</version>
+        <scope>test</scope>
     </dependency>
 
 
