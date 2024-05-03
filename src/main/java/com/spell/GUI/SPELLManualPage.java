@@ -127,7 +127,11 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                     outputTextArea.setText(edit.lowerCase());
                 } else if (casingComboBox.getSelectedIndex() == 2) {
                     outputTextArea.setText(edit.camelCasing());
-                } 
+                } else if (casingComboBox.getSelectedIndex() == 3) {
+                    outputTextArea.setText(edit.sentenceCase());
+                } else if (casingComboBox.getSelectedIndex() == 4) {
+                    outputTextArea.setText(edit.capitalizedCase());
+                }
             } else if (e.getSource() == spaceRemoverComboBox) {
                 // TODO
             } else if (e.getSource() == alphabetizerComboBox) {
