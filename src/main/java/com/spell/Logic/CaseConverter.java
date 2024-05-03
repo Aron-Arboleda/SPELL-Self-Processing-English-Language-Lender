@@ -8,19 +8,19 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String upperCase() {
-        String text = super.getText().toUpperCase();
+        String text = super.multipleSpaceRemover().toUpperCase();
         setText(text);
         return text;
     }
 
     public String lowerCase() {
-        String text = super.getText().toLowerCase();
+        String text = super.multipleSpaceRemover().toLowerCase();
         setText(text);
         return text;
     }
 
     public String camelCasing() {
-        String text = super.getText();
+        String text = super.multipleSpaceRemover();
         sbEditor.append(text);
 
         /*Pattern pattern = Pattern.compile("\\w+", Pattern.CASE_INSENSITIVE);
@@ -49,38 +49,24 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String sentenceCase() {
-        String text = super.getText();
+        String text = super.multipleSpaceRemover();
         sbEditor.append(text);
 
-        for(int i = 0; i < text.length(); i++){
-            if(text.charAt(i) == '.'){
-                i++;
-                /* while(text.charAt(i) == ' '){
+        for(int i = 0; i < sbEditor.length(); i++) {
+            if ((i != sbEditor.length() - 1) && (sbEditor.charAt(i) == '.' || sbEditor.charAt(i) == '?' || sbEditor.charAt(i) == '!')) {
+                if(Character.isWhitespace(sbEditor.charAt(i + 1))) {
                     i++;
-                } */
-                sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
-            } else if (text.charAt(i) == '?'){
-                i++;
-               /* while(text.charAt(i) == ' '){
-                    i++;
-                } */
-                sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
-            } else if (text.charAt(i) == '!'){
-                i++;
-                /* while(text.charAt(i) == ' '){
-                    i++;
-                } */
-                sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
+                }
+                sbEditor.setCharAt(i + 1, Character.toUpperCase(sbEditor.charAt(i + 1)));
             }
         }
-
-        text = sbEditor.toString();
-        sbEditor.delete(0, sbEditor.length());
-        return text;
+            text = sbEditor.toString();
+            sbEditor.delete(0, sbEditor.length());
+            return text;
     }
 
     public String capitalizedCase() {
-        String text = super.getText();
+        String text = super.multipleSpaceRemover();
         sbEditor.append(text);
 
         sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));

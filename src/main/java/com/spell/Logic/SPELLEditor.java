@@ -26,6 +26,26 @@ public class SPELLEditor implements TextEdit {
     public String getText() {
         return text;
     }
+
+    public String multipleSpaceRemover() {
+        sbEditor.append(text);
+
+        for(int i = 0; i < sbEditor.length(); i++) {
+            if (Character.isWhitespace(sbEditor.charAt(i))) {
+                if(i == 0){
+                    sbEditor.deleteCharAt(i);
+                }
+
+                while (Character.isWhitespace(sbEditor.charAt(i + 1))) {
+                    sbEditor.deleteCharAt(i + 1);
+                }
+            }
+        }
+
+        text = sbEditor.toString();
+        sbEditor.delete(0, sbEditor.length());
+        return text;
+    }
 }
 
 
