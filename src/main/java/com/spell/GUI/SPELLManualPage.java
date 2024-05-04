@@ -137,7 +137,12 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                     outputTextArea.setText(edit.capitalizedCase());
                 }
             } else if (e.getSource() == spaceRemoverComboBox) {
-                // TODO
+                SpaceAndLineRemover edit = new SpaceAndLineRemover(inputText);
+                if (spaceRemoverComboBox.getSelectedIndex() == 0) {
+                    outputTextArea.setText(edit.removeLineBreaks());
+                } else if (spaceRemoverComboBox.getSelectedIndex() == 1) {
+                    outputTextArea.setText(edit.removeSpaces());
+                }
             } else if (e.getSource() == alphabetizerComboBox) {
                 // TODO
             }

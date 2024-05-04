@@ -27,7 +27,7 @@ public class SPELLEditor implements TextEdit {
         return text;
     }
 
-    public String multipleSpaceRemover() {
+    public String excessSpaceRemover() {
         sbEditor.append(text);
 
         while (Character.isWhitespace(sbEditor.charAt(0))){
@@ -36,10 +36,22 @@ public class SPELLEditor implements TextEdit {
 
         for(int i = 0; i < sbEditor.length(); i++) {
             if (Character.isWhitespace(sbEditor.charAt(i))) {
-                while (Character.isWhitespace(sbEditor.charAt(i + 1))) {
+                while (!(i == sbEditor.length() - 1) && Character.isWhitespace(sbEditor.charAt(i + 1))) {
                     sbEditor.deleteCharAt(i + 1);
                 }
+
+                if (!(i == sbEditor.length() - 1) && (sbEditor.charAt(i + 1) == '.' || sbEditor.charAt(i + 1) == '?' || sbEditor.charAt(i + 1) == '!' || sbEditor.charAt(i + 1) == ',' || sbEditor.charAt(i + 1) == '"')) {
+                    sbEditor.deleteCharAt(i);
+                }
+
+                if (i == sbEditor.length() - 1){
+                    sbEditor.deleteCharAt(i);
+                }
             }
+        }
+
+        while (Character.isWhitespace(sbEditor.charAt(sbEditor.length() - 1))){
+            sbEditor.deleteCharAt(sbEditor.length() - 1);
         }
 
         text = sbEditor.toString();
