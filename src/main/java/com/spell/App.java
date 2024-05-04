@@ -1,8 +1,6 @@
 package com.spell;
 
-
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import com.spell.GUI.SPELLFrame;
 

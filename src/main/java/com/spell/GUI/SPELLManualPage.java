@@ -13,12 +13,11 @@ import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.BadLocationException;
+
 
 import com.spell.Logic.*;
 
