@@ -7,28 +7,42 @@ import javax.swing.text.Highlighter;
 
 import org.languagetool.rules.RuleMatch;
 
+import com.spell.Logic.GrammarAndSpellingFixer;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SPELLLineIndicators {
     Highlighter highlighter;
-    DefaultHighlightPainter painter;
-    List<RuleMatch> matches;
-    JTextArea textArea;
+    ArrayList<DefaultHighlightPainter> painterList;
+    GrammarAndSpellingFixer checker;
+    JTextArea outputtextArea;
+    String inputText;
 
-    public SPELLLineIndicators(JTextArea textArea, List<RuleMatch> matches) {
-        this.textArea = textArea; 
-        highlighter = textArea.getHighlighter();
-        this.matches = matches;
+    public SPELLLineIndicators(String inputText, JTextArea outputtextArea, GrammarAndSpellingFixer checker) {
+        this.inputText = inputText;
+        this.outputtextArea = outputtextArea;
+        highlighter = outputtextArea.getHighlighter();
+        this.checker = checker;
+        painterList = new ArrayList<DefaultHighlightPainter>();
+        painterList.add(new DefaultHighlightPainter(Color.RED));
+        painterList.add(new DefaultHighlightPainter(Color.BLUE));
     }
 
-    public void showHighlights() throws BadLocationException {
-        for (RuleMatch match : matches) {
-            int start = textArea.getLineStartOffset(match.getFromPos()); 
-            int end = textArea.getLineEndOffset(match.getToPos());
-            painter = new DefaultHighlightPainter(Color.RED);
-            highlighter.addHighlight(start, end, painter);
+    public void showHighlights() {
+        for (RuleMatch match : checker.matches) {
+            try {
+                DefaultHighlightPainter painter;
+                if (match.getRule().getCategory().getId().toString().equals("TYPOS")) {
+                    painter = painterList.get(0);
+                } else {
+                    painter = painterList.get(1);
+                }
+                highlighter.addHighlight(match.getFromPos(), match.getToPos(), painter);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
