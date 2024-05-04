@@ -2,11 +2,9 @@ package com.spell;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
-import org.languagetool.Languages;
 import org.languagetool.language.AmericanEnglish;
 import org.languagetool.rules.RuleMatch;
 
-import java.io.IOException;
 import java.util.List;
 
 public class LanguageToolExample {

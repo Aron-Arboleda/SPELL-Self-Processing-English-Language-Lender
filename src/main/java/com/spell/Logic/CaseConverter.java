@@ -23,19 +23,6 @@ public class CaseConverter extends SPELLEditor {
         String text = super.excessSpaceRemover();
         sbEditor.append(text);
 
-        /*Pattern pattern = Pattern.compile("\\w+", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(text);
-
-        int begin = 0;
-        while (matcher.find(begin) == true) {
-            if(matcher.end() + 1 < sbEditor.length()) {
-                sbEditor.setCharAt(matcher.end() + 1, Character.toUpperCase(text.charAt(matcher.end() + 1)));
-                begin = matcher.end();
-            } else {
-                break;
-            }
-        }*/
-
         sbEditor.setCharAt(0, Character.toLowerCase(sbEditor.charAt(0)));
 
         for(int i = 0; i < sbEditor.length(); i++){

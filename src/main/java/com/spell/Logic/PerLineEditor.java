@@ -14,12 +14,16 @@ class BulletsEditor extends PerLineEditor {
         super(textToEdit);
     }
 
-    public void addBullets() {
-        // ... \n
+    public String addBullets() {
+        String text = super.excessSpaceRemover();
+        text.replaceAll("\n", "\n• ");
+        return text;
     }
 
-    public void removeBullets() {
-        // ...
+    public String removeBullets() {
+        String text = super.excessSpaceRemover();
+        text = text.replaceAll("•", "");
+        return text;
     }
 }
 

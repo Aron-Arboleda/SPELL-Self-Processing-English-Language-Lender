@@ -11,7 +11,6 @@ import com.spell.Logic.GrammarAndSpellingFixer;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SPELLLineIndicators {
     Highlighter highlighter;
