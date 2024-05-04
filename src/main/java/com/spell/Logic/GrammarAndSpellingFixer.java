@@ -19,15 +19,11 @@ public class GrammarAndSpellingFixer extends SPELLEditor {
 
     public String fixGrammarAndSpelling() {
         StringBuilder sb = new StringBuilder();
+        String textToCheck = super.getText();
         try {
-
             Language language = new AmericanEnglish();
             JLanguageTool langTool = new JLanguageTool(language);
 
-            String textToCheck = super.getText();
-
-              
-            
             List<RuleMatch> matches = langTool.check(textToCheck);
             for (RuleMatch match : matches) {
                 sb.append("Potential error at characters " + match.getFromPos() + "-" + match.getToPos() + ": " + match.getMessage() + "\n\nSuggested correction(s): " + match.getSuggestedReplacements());
@@ -36,7 +32,9 @@ public class GrammarAndSpellingFixer extends SPELLEditor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.setText(sb.toString());
-        return sb.toString();
+        System.out.println(sb.toString());
+
+        super.setText(textToCheck);
+        return textToCheck;
     }
 }
