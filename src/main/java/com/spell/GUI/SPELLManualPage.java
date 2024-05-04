@@ -9,6 +9,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -17,14 +18,19 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
+
+import org.languagetool.rules.RuleMatch;
+import org.w3c.dom.events.MouseEvent;
 
 import com.spell.Logic.*;
 
 public class SPELLManualPage extends SPELLPage implements ActionListener {
     // Manual Page Components
-    SPELLTextArea inputTextArea, outputTextArea;
+    static SPELLTextArea inputTextArea, outputTextArea;
     SPELLComboBox grammarComboBox, casingComboBox, spaceRemoverComboBox, alphabetizerComboBox;
     ArrayList<SPELLComboBox> comboBoxes = new ArrayList<SPELLComboBox>();
     SPELLButton clearButton, copyButton;
@@ -33,6 +39,8 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
             .getImage();
 
     SPELLButton manualButton, manualBackButton;
+
+    static GrammarAndSpellingFixer checker;
 
     public SPELLManualPage(String name, Color background) {
         super(name, background);
@@ -52,6 +60,21 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
 
         outputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 new Color(0x22252A), Color.WHITE);
+        outputTextArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                int position = outputTextArea.viewToModel2D(e.getPoint());
+                for (int i = 0; i < checker.matches.size(); i++) {
+                    RuleMatch newMatch = checker.matches.get(i);
+                    if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()){
+                        outputTextArea.setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch));
+                        outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
+                        outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
+                        break;
+                    }
+                }
+            }
+        });
 
         JScrollPane outputTextAreaPane = ScrollPaneFactory.newScrollPane(outputTextArea);
         outputTextAreaPane.setBounds(805, 105, 340, 460);
@@ -117,11 +140,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         } else if (comboBoxes.contains(e.getSource())) {
             if (e.getSource() == grammarComboBox) {
                 if (grammarComboBox.getSelectedIndex() == 0) {
-                    GrammarAndSpellingFixer edit = new GrammarAndSpellingFixer(inputText);
-                    edit.buildGrammarAndSpellingChecker();
-                    SPELLLineIndicators highlightErrors = new SPELLLineIndicators(inputText, outputTextArea, edit);
-                    outputTextArea.setText(inputText);
-                    highlightErrors.showHighlights();
+                    refreshLanguageToolChecker(inputText, outputTextArea);
                 }
             } else if (e.getSource() == casingComboBox) {
                 CaseConverter edit = new CaseConverter(inputText);
@@ -147,5 +166,13 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                 // TODO
             }
         }
+    }
+
+    public static void refreshLanguageToolChecker(String inputText, JTextArea outputTextArea) {
+        checker = new GrammarAndSpellingFixer(inputText);
+        checker.buildGrammarAndSpellingChecker();
+        SPELLLineIndicators highlightErrors = new SPELLLineIndicators(inputText, outputTextArea, checker);
+        outputTextArea.setText(inputText);
+        highlightErrors.showHighlights();
     }
 }

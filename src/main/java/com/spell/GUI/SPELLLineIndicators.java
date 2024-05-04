@@ -39,7 +39,11 @@ public class SPELLLineIndicators {
                 } else {
                     painter = painterList.get(1);
                 }
-                highlighter.addHighlight(match.getFromPos(), match.getToPos(), painter);
+                int start = match.getFromPos();
+                int end = match.getToPos();
+                highlighter.addHighlight(start, end, painter);
+                //ArrayList<Integer> highlightEnds = new ArrayList<Integer>();
+                //highlightEnds.add(start); highlightEnds.add(end);
             } catch (BadLocationException e) {
                 e.printStackTrace();
             }
