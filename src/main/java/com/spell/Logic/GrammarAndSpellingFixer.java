@@ -1,5 +1,6 @@
 package com.spell.Logic;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -18,14 +19,11 @@ import org.languagetool.tools.Tools;
 
 
 public class GrammarAndSpellingFixer extends SPELLEditor {
-    Language language;
-    JLanguageTool langTool;
+    Language language = new AmericanEnglish();
+    JLanguageTool langTool = new JLanguageTool(language);
     public List<RuleMatch> matches;
     public GrammarAndSpellingFixer(String textToEdit) {
         super(textToEdit);
-        
-        language = new AmericanEnglish();
-        langTool = new JLanguageTool(language);
     }
 
     public String buildGrammarAndSpellingChecker() {
@@ -48,3 +46,14 @@ public class GrammarAndSpellingFixer extends SPELLEditor {
         return textToCheck;
     }
 }
+
+class MatchedErrors {
+    RuleMatch match;
+    ArrayList<Integer> indexEndPoints;
+
+    public MatchedErrors(RuleMatch match, ArrayList<Integer> indexEndPoints) {
+        this.match = match;
+        this.indexEndPoints = indexEndPoints;
+    }
+}
+

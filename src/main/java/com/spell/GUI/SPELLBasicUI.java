@@ -2,8 +2,12 @@ package com.spell.GUI;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import org.languagetool.rules.RuleMatch;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 class SPELLPage extends JPanel {
     String pageName;
@@ -108,6 +112,28 @@ class SPELLTextArea extends JTextArea {
         this.setLineWrap(true);
         this.setWrapStyleWord(true);
         this.setCaretColor(Color.WHITE);
+    }
+    
+    public static JPopupMenu createCustomContextMenu(final SPELLTextArea textArea, RuleMatch match) {
+        JPopupMenu contextMenu = new JPopupMenu();
+
+        int i = 0;
+        for (final String replacementText : match.getSuggestedReplacements()) {
+            if (i >= 5) {
+                break;
+            }
+            JMenuItem replacementMenu = new JMenuItem(replacementText);
+            replacementMenu.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    textArea.replaceSelection(replacementText);
+                    SPELLManualPage.refreshLanguageToolChecker(textArea.getText(), textArea);
+                }
+            });
+            contextMenu.add(replacementMenu);
+            i++;
+        }
+        return contextMenu;
     }
 }
 
