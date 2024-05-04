@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
 
 import com.spell.Logic.*;
 
@@ -117,7 +118,10 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
             if (e.getSource() == grammarComboBox) {
                 if (grammarComboBox.getSelectedIndex() == 0) {
                     GrammarAndSpellingFixer edit = new GrammarAndSpellingFixer(inputText);
-                    outputTextArea.setText(edit.fixGrammarAndSpelling());
+                    edit.buildGrammarAndSpellingChecker();
+                    SPELLLineIndicators highlightErrors = new SPELLLineIndicators(inputText, outputTextArea, edit);
+                    outputTextArea.setText(inputText);
+                    highlightErrors.showHighlights();
                 }
             } else if (e.getSource() == casingComboBox) {
                 CaseConverter edit = new CaseConverter(inputText);
