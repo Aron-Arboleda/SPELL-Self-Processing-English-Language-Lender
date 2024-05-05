@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-
 public class SPELLFrame extends JFrame implements ActionListener {
     static SPELLPage homePage, manualPage, automaticPage, iPage;
     ArrayList<SPELLPage> pagesList = new ArrayList<SPELLPage>();
@@ -36,7 +35,7 @@ public class SPELLFrame extends JFrame implements ActionListener {
         homePage.setImage(manualBackgroundImage);
 
         manualButton = new OpaqueButton("Go to Manual Page");
-        manualButton.setBounds(250, 415, 220, 85);
+        manualButton.setBounds(233, 400, 250, 123);
         manualButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
@@ -47,7 +46,7 @@ public class SPELLFrame extends JFrame implements ActionListener {
         manualButton.addActionListener(this);
 
         automaticButton = new OpaqueButton("Go to Automatic Page");
-        automaticButton.setBounds(660, 410, 310, 95);
+        automaticButton.setBounds(655, 410, 325, 125);
         automaticButton.addActionListener(this);
         automaticButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -58,7 +57,7 @@ public class SPELLFrame extends JFrame implements ActionListener {
         });
 
         instructionsButton = new OpaqueButton("Go to Instructions Page");
-        instructionsButton.setBounds(65, 55, 45, 65);
+        instructionsButton.setBounds(62, 55, 51, 68);
         instructionsButton.addActionListener(this);
 
         homePage.add(manualButton);

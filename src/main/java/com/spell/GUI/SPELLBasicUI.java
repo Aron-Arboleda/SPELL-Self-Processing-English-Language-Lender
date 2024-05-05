@@ -2,6 +2,8 @@ package com.spell.GUI;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import org.languagetool.rules.RuleMatch;
 
@@ -20,7 +22,7 @@ class SPELLPage extends JPanel {
         this.setBackground(background);
     }
 
-    public void setImage(Image backgroundImage){
+    public void setImage(Image backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
 
@@ -30,10 +32,10 @@ class SPELLPage extends JPanel {
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 
-    public static Image newScaledImage(String imageName, int width, int height){
+    public static ImageIcon newScaledImage(String imageName, int width, int height) {
         ImageIcon image = new ImageIcon(SPELLPage.class.getResource("/" + imageName));
         ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
-        return scaledImage.getImage();
+        return scaledImage;
     }
 }
 
@@ -72,7 +74,7 @@ class OpaqueButton extends JButton {
         this.setToolTipText(tooltip);
         this.setFocusable(false);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.setBackground(new Color(255,255,255,50));
+        this.setBackground(new Color(255, 255, 255, 50));
         this.setOpaque(false);
         final OpaqueButton button = this;
         this.addMouseListener(new MouseAdapter() {
@@ -88,8 +90,6 @@ class OpaqueButton extends JButton {
             public void mouseExited(MouseEvent e) {
                 button.setOpaque(false);
             }
-
-
 
         });
     }
@@ -113,7 +113,7 @@ class SPELLTextArea extends JTextArea {
         this.setWrapStyleWord(true);
         this.setCaretColor(Color.WHITE);
     }
-    
+
     public static JPopupMenu createCustomContextMenu(final SPELLTextArea textArea, RuleMatch match) {
         JPopupMenu contextMenu = new JPopupMenu();
 
@@ -145,9 +145,37 @@ class SPELLComboBox extends JComboBox<String> {
         this.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setToolTipText(toolTip);
-        this.setBackground(Color.white);
-        this.setForeground(Color.darkGray);
-        this.setMaximumSize(new Dimension(200, 50));
+        this.setForeground(Color.WHITE);
+        this.setBackground(new Color(0x1B1E23));
+        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
+                BorderFactory.createEmptyBorder(10, 20, 10, 20)));
+
+        final SPELLComboBox comboBox = this;
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (comboBox.isEnabled()) {
+                    comboBox.setBackground(new Color(0x23272E));
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                comboBox.setBackground(new Color(0x1B1E23));
+            }
+        });
+
+        this.setUI(new BasicComboBoxUI() {
+            @Override
+            protected JButton createArrowButton() {
+                JButton arrowButton = new BasicArrowButton(SwingConstants.SOUTH);
+                arrowButton.setBackground(new Color(0x1B1E23));
+                arrowButton.setForeground(Color.WHITE);
+                arrowButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+                return arrowButton;
+            }
+
+        });
     }
 }
 

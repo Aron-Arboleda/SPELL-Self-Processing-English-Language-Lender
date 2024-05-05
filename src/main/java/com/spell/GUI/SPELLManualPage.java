@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-
 import org.languagetool.rules.RuleMatch;
 import org.w3c.dom.events.MouseEvent;
 
@@ -46,8 +45,11 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
 
         this.setImage(manualEditorBackImage);
 
-        manualBackButton = new SPELLButton("Back", 15, new Color(0x22252A), Color.white, "Return to Previous Page");
-        manualBackButton.setBounds(20, 20, 100, 50);
+        ImageIcon backButtonIcon = SPELLPage.newScaledImage("ChalkBackButtonIcon.png", 60, 35);
+
+        manualBackButton = new SPELLButton("", 15, new Color(0x181C20), Color.white, "Return to Previous Page");
+        manualBackButton.setBounds(50, 35, 80, 40);
+        manualBackButton.setIcon(backButtonIcon);
         manualBackButton.addActionListener(this);
 
         inputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
@@ -65,8 +67,9 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                 int position = outputTextArea.viewToModel2D(e.getPoint());
                 for (int i = 0; i < checker.matches.size(); i++) {
                     RuleMatch newMatch = checker.matches.get(i);
-                    if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()){
-                        outputTextArea.setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch));
+                    if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
+                        outputTextArea
+                                .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch));
                         outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
                         outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
                         break;
@@ -79,23 +82,21 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         outputTextAreaPane.setBounds(805, 105, 340, 460);
         outputTextAreaPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        JPanel comboBoxesContainer = new JPanel();
-        comboBoxesContainer.setLayout(new BoxLayout(comboBoxesContainer, BoxLayout.Y_AXIS));
-        comboBoxesContainer.setAlignmentY(RIGHT_ALIGNMENT);
-        comboBoxesContainer.setBounds(50, 100, 270, 330);
-        comboBoxesContainer.setBackground(new Color(0x22252A));
-
         String[] grammarCBOptions = { "Fix Grammar", "Fix Spelling" };
         grammarComboBox = new SPELLComboBox(grammarCBOptions, "Grammar & Spelling Editor");
+        grammarComboBox.setBounds(80, 100, 210, 45);
         comboBoxes.add(grammarComboBox);
         String[] caseCBOptions = { "UPPER CASE", "lower case", "camelCasing", "Sentence case", "Capitalized Case" };
         casingComboBox = new SPELLComboBox(caseCBOptions, "Case Editor");
+        casingComboBox.setBounds(80, 155, 210, 45);
         comboBoxes.add(casingComboBox);
         String[] spaceRemoverCBOptions = { "Remove Line Breaks", "Remove Spaces" };
         spaceRemoverComboBox = new SPELLComboBox(spaceRemoverCBOptions, "Whitespace Remover");
+        spaceRemoverComboBox.setBounds(80, 210, 210, 45);
         comboBoxes.add(spaceRemoverComboBox);
         String[] alphabetizerCBOptions = { "Sort Alphabetically", "Reverse Alphabetical" };
         alphabetizerComboBox = new SPELLComboBox(alphabetizerCBOptions, "Alphabetical Sorter");
+        alphabetizerComboBox.setBounds(80, 265, 210, 45);
         comboBoxes.add(alphabetizerComboBox);
 
         for (SPELLComboBox comboBox : comboBoxes) {
@@ -110,15 +111,13 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         copyButton.setBounds(800, 580, 70, 40);
         copyButton.addActionListener(this);
 
-        comboBoxesContainer.add(grammarComboBox);
-        comboBoxesContainer.add(casingComboBox);
-        comboBoxesContainer.add(spaceRemoverComboBox);
-        comboBoxesContainer.add(alphabetizerComboBox);
-
         this.add(manualBackButton);
         this.add(inputTextAreaPane);
         this.add(outputTextAreaPane);
-        this.add(comboBoxesContainer);
+        this.add(grammarComboBox);
+        this.add(casingComboBox);
+        this.add(spaceRemoverComboBox);
+        this.add(alphabetizerComboBox);
         this.add(clearButton);
         this.add(copyButton);
 
