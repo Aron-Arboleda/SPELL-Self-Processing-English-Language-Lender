@@ -21,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-
 import org.languagetool.rules.RuleMatch;
 import org.w3c.dom.events.MouseEvent;
 
@@ -46,8 +45,11 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
 
         this.setImage(manualEditorBackImage);
 
-        manualBackButton = new SPELLButton("Back", 15, new Color(0x22252A), Color.white, "Return to Previous Page");
-        manualBackButton.setBounds(20, 20, 100, 50);
+        ImageIcon backButtonIcon = SPELLPage.newScaledImage("ChalkBackButtonIcon.png", 60, 35);
+
+        manualBackButton = new SPELLButton("", 15, new Color(0x181C20), Color.white, "Return to Previous Page");
+        manualBackButton.setBounds(50, 35, 80, 40);
+        manualBackButton.setIcon(backButtonIcon);
         manualBackButton.addActionListener(this);
 
         inputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
@@ -65,8 +67,9 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                 int position = outputTextArea.viewToModel2D(e.getPoint());
                 for (int i = 0; i < checker.matches.size(); i++) {
                     RuleMatch newMatch = checker.matches.get(i);
-                    if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()){
-                        outputTextArea.setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch));
+                    if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
+                        outputTextArea
+                                .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch));
                         outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
                         outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
                         break;

@@ -30,10 +30,10 @@ class SPELLPage extends JPanel {
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 
-    public static Image newScaledImage(String imageName, int width, int height){
+    public static ImageIcon newScaledImage(String imageName, int width, int height){
         ImageIcon image = new ImageIcon(SPELLPage.class.getResource("/" + imageName));
         ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
-        return scaledImage.getImage();
+        return scaledImage;
     }
 }
 
