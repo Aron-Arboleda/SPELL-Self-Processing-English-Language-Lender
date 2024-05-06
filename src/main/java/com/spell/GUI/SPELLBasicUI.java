@@ -50,6 +50,7 @@ class SPELLButton extends JButton {
         this.setToolTipText(tooltip);
         this.setFocusable(false);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
         final SPELLButton button = this;
         this.addMouseListener(new MouseAdapter() {
@@ -138,11 +139,11 @@ class SPELLTextArea extends JTextArea {
 }
 
 class SPELLComboBox extends JComboBox<String> {
-    public SPELLComboBox(String[] items, String toolTip) {
+    public SPELLComboBox(String[] items, String toolTip, int fontSize) {
         for (String item : items) {
             this.addItem(item);
         }
-        this.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        this.setFont(new Font("Segoe UI Emoji", Font.PLAIN, fontSize));
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setToolTipText(toolTip);
         this.setForeground(Color.WHITE);
@@ -176,6 +177,7 @@ class SPELLComboBox extends JComboBox<String> {
             }
 
         });
+
     }
 }
 
@@ -202,3 +204,71 @@ class SPELLAutoIconsPanel extends JPanel {
         this.add(taskBar, BorderLayout.SOUTH);
     }
 }
+
+class FakeComboBox extends JPanel {
+
+    public FakeComboBox(final CustomizedDropdownPanel dropdownPanel) {
+        this.setLayout(null);
+        this.setBorder(new EmptyBorder(0, 0, 0, 0));
+        this.setToolTipText("Bullet Editor");
+        this.setForeground(Color.WHITE);
+        this.setBackground(new Color(0x1B1E23));
+        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        final FakeComboBox panel = this;
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                panel.setBackground(new Color(0x23272E));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                panel.setBackground(new Color(0x1B1E23));
+            }
+        });
+
+        SPELLLabel bulletLabel = new SPELLLabel("Bullet Editor", 16, Color.WHITE);
+        bulletLabel.setBounds(22, 10, 100, 35);
+
+        JButton arrowButton = new BasicArrowButton(SwingConstants.SOUTH);
+        arrowButton.setBackground(new Color(0x1B1E23));
+        arrowButton.setBounds(165, 10, 25, 25);
+        arrowButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        arrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (dropdownPanel.isVisible()) {
+                    dropdownPanel.setVisible(false);
+                } else {
+                    dropdownPanel.setVisible(true);
+                }
+            }
+        });
+
+        this.add(bulletLabel);
+        this.add(arrowButton);
+    }
+
+}
+
+class CustomizedDropdownPanel extends JPanel {
+
+    public CustomizedDropdownPanel(Color backColor) {
+        this.setLayout(null);
+        this.setBackground(backColor);
+        this.setBounds(this.getX(), this.getX() + this.getHeight(), this.getWidth(), this.getHeight());
+        this.setVisible(false);
+    }
+}
+
+class SPELLTextField extends JTextField {
+
+    public SPELLTextField(String toolTip, int fontSize) {
+        this.setFont(new Font("Segoe UI Emoji", Font.PLAIN, fontSize));
+        this.setToolTipText(toolTip);
+        this.setForeground(Color.WHITE);
+        this.setBackground(new Color(0x1B1E23));
+        this.setCaretColor(Color.WHITE);
+    }
+} 
