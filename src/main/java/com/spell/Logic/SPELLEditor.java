@@ -45,7 +45,7 @@ public class SPELLEditor implements TextEdit {
         if (Character.isWhitespace(sbEditor.charAt(0))){
             sbEditor.deleteCharAt(0);
         }
-        if (Character.isWhitespace(sbEditor.charAt(sbEditor.length() - 1)){
+        if (Character.isWhitespace(sbEditor.charAt(sbEditor.length() - 1))){
             sbEditor.deleteCharAt(sbEditor.length() - 1);
         }
 
