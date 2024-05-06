@@ -9,7 +9,8 @@ import javax.swing.ImageIcon;
 
 public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
     // Automatic Page Components
-    SPELLAutoIconsPanel grammarAIP, casingAIP, spaceRemoverAIP, alphabetizerAIP;
+    SPELLAutoIconsPanel alphabetizerPanel, reverseAlphabetizerPanel, upperCasePanel, lowerCasePanel, camelCasingPanel,
+    sentenceCasePanel, capitalizedCasePanel, removeLineBreaksPanel, removeSpacesPanel;
 
     SPELLButton automaticBackButton;
 
@@ -27,6 +28,8 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         automaticBackButton.setBounds(50, 35, 60, 30);
         automaticBackButton.setIcon(backButtonIcon);
         automaticBackButton.addActionListener(this);
+
+
 
         
 

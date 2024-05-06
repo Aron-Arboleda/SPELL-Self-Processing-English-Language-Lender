@@ -185,29 +185,7 @@ class SPELLComboBox extends JComboBox<String> {
     }
 }
 
-class SPELLAutoIconsPanel extends JPanel {
-    String iconName;
-    JToggleButton iconToggleButton;
 
-    public SPELLAutoIconsPanel(String iconName, Color background) {
-        this.iconName = iconName;
-        this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(200, 200));
-        this.setMinimumSize(this.getPreferredSize());
-        this.setMaximumSize(this.getPreferredSize());
-        this.setBackground(background);
-
-        JPanel taskBar = new JPanel();
-        taskBar.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 10));
-        taskBar.setBackground(background.darker());
-
-        iconToggleButton = new JToggleButton("•");
-        iconToggleButton.setSize(15, 15);
-        taskBar.add(iconToggleButton);
-
-        this.add(taskBar, BorderLayout.SOUTH);
-    }
-}
 
 class FakeComboBox extends JPanel {
 
@@ -276,3 +254,29 @@ class SPELLTextField extends JTextField {
         this.setCaretColor(Color.WHITE);
     }
 } 
+// #region[rgba(0, 0, 0, 0.15)] Automatic Page Specific UI
+
+class SPELLAutoIconsPanel extends JPanel {
+    String iconName;
+    JToggleButton iconToggleButton;
+
+    public SPELLAutoIconsPanel(String iconName, Color background) {
+        this.iconName = iconName;
+        this.setLayout(new BorderLayout());
+        this.setPreferredSize(new Dimension(200, 200));
+        this.setMinimumSize(this.getPreferredSize());
+        this.setMaximumSize(this.getPreferredSize());
+        this.setBackground(background);
+
+        JPanel taskBar = new JPanel();
+        taskBar.setLayout(null);
+        taskBar.setBackground(background.darker());
+
+        iconToggleButton = new JToggleButton("•");
+        iconToggleButton.setSize(15, 15);
+        taskBar.add(iconToggleButton);
+
+        this.add(taskBar, BorderLayout.SOUTH);
+    }
+}
+// #endregion

@@ -84,7 +84,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         outputTextAreaPane.setBounds(805, 105, 340, 460);
         outputTextAreaPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        String[] grammarCBOptions = { "Fix Grammar", "Fix Spelling" };
+        String[] grammarCBOptions = { "Check Grammar and Spelling" };
         grammarComboBox = new SPELLComboBox(grammarCBOptions, "Grammar & Spelling Editor", 15);
         grammarComboBox.setBounds(80, 100, 210, 45);
         comboBoxes.add(grammarComboBox);
