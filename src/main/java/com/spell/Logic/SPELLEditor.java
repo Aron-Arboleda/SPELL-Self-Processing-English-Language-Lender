@@ -30,10 +30,6 @@ public class SPELLEditor implements TextEdit {
     public String excessSpaceRemover() {
         sbEditor.append(text);
 
-        while (Character.isWhitespace(sbEditor.charAt(0))){
-            sbEditor.deleteCharAt(0);
-        }
-
         for(int i = 0; i < sbEditor.length(); i++) {
             if (Character.isWhitespace(sbEditor.charAt(i))) {
                 while (!(i == sbEditor.length() - 1) && Character.isWhitespace(sbEditor.charAt(i + 1))) {
@@ -43,16 +39,19 @@ public class SPELLEditor implements TextEdit {
                 if (!(i == sbEditor.length() - 1) && (sbEditor.charAt(i + 1) == '.' || sbEditor.charAt(i + 1) == '?' || sbEditor.charAt(i + 1) == '!' || sbEditor.charAt(i + 1) == ',' || sbEditor.charAt(i + 1) == '"')) {
                     sbEditor.deleteCharAt(i);
                 }
-
-                if (i == sbEditor.length() - 1){
-                    sbEditor.deleteCharAt(i);
-                }
             }
         }
 
-        while (Character.isWhitespace(sbEditor.charAt(sbEditor.length() - 1))){
+        if (Character.isWhitespace(sbEditor.charAt(0))){
+            sbEditor.deleteCharAt(0);
+        }
+        if (Character.isWhitespace(sbEditor.charAt(sbEditor.length() - 1)){
             sbEditor.deleteCharAt(sbEditor.length() - 1);
         }
+
+        /* while (Character.isWhitespace(sbEditor.charAt(sbEditor.length() - 1))){
+            sbEditor.deleteCharAt(sbEditor.length() - 1);
+        } */
 
         text = sbEditor.toString();
         sbEditor.delete(0, sbEditor.length());

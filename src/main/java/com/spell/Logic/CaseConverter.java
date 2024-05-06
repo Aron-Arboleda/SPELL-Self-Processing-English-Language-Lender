@@ -34,6 +34,7 @@ public class CaseConverter extends SPELLEditor {
 
         text = sbEditor.toString();
         sbEditor.delete(0, sbEditor.length());
+        setText(text);
         return text;
     }
 
@@ -52,6 +53,7 @@ public class CaseConverter extends SPELLEditor {
         }
             text = sbEditor.toString();
             sbEditor.delete(0, sbEditor.length());
+            setText(text);
             return text;
     }
 
@@ -68,6 +70,7 @@ public class CaseConverter extends SPELLEditor {
 
         text = sbEditor.toString();
         sbEditor.delete(0, sbEditor.length());
+        setText(text);
         return text;
     }
 }
