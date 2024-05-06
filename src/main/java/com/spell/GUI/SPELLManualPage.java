@@ -49,6 +49,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         ImageIcon backButtonIcon = SPELLPage.newScaledImage("ChalkBackButtonIcon.png", 60, 35);
 
         manualBackButton = new SPELLButton("", 15, new Color(0x181C20), Color.white, "Return to Previous Page");
+        manualBackButton.removeBorder();
         manualBackButton.setBounds(50, 35, 80, 40);
         manualBackButton.setIcon(backButtonIcon);
         manualBackButton.addActionListener(this);

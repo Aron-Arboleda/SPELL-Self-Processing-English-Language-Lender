@@ -67,6 +67,10 @@ class SPELLButton extends JButton {
             }
         });
     }
+
+    public void removeBorder(){
+        this.setBorder(new EmptyBorder(0, 0, 0, 0));
+    }
 }
 
 class OpaqueButton extends JButton {

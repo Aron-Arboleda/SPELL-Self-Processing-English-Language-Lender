@@ -23,6 +23,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         ImageIcon backButtonIcon = SPELLPage.newScaledImage("InkBackButtonIcon.png", 40, 25);
         
         automaticBackButton = new SPELLButton("", 15, new Color(0xF3F3F3), Color.white, "Return to Previous Page");
+        automaticBackButton.removeBorder();
         automaticBackButton.setBounds(50, 35, 60, 30);
         automaticBackButton.setIcon(backButtonIcon);
         automaticBackButton.addActionListener(this);
