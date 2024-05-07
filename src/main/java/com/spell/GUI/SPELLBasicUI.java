@@ -8,6 +8,8 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import org.languagetool.rules.RuleMatch;
 
+import com.spell.Logic.GrammarAndSpellingFixer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -51,7 +53,7 @@ class SPELLButton extends JButton {
         this.setToolTipText(tooltip);
         this.setFocusable(false);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+        this.setBorder(BorderFactory.createLineBorder(foreColor, 1));
 
         final SPELLButton button = this;
         this.addMouseListener(new MouseAdapter() {
@@ -117,10 +119,10 @@ class SPELLTextArea extends JTextArea {
         this.setForeground(foreColor);
         this.setLineWrap(true);
         this.setWrapStyleWord(true);
-        this.setCaretColor(Color.WHITE);
+        this.setCaretColor(foreColor);
     }
 
-    public static JPopupMenu createCustomContextMenu(final SPELLTextArea textArea, RuleMatch match) {
+    public static JPopupMenu createCustomContextMenu(final SPELLTextArea textArea, RuleMatch match, final String page) {
         JPopupMenu contextMenu = new JPopupMenu();
 
         int i = 0;
@@ -133,7 +135,7 @@ class SPELLTextArea extends JTextArea {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     textArea.replaceSelection(replacementText);
-                    SPELLManualPage.refreshLanguageToolChecker(textArea.getText(), textArea);
+                    SPELLManualPage.refreshLanguageToolChecker(textArea.getText(), textArea, page);
                 }
             });
             contextMenu.add(replacementMenu);
@@ -258,6 +260,7 @@ class SPELLTextField extends JTextField {
 class SPELLAutoIconsPanel extends JPanel {
     String iconName;
     JToggleButton iconToggleButton;
+    static JToggleButton activeToggleButton;
 
     public SPELLAutoIconsPanel(String iconName) {
         this.iconName = iconName;
@@ -306,15 +309,20 @@ class SPELLAutoIconsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (iconToggleButton.getText().equals("Off")) {
+                    if (activeToggleButton != null) {
+                        activeToggleButton.doClick();
+                        activeToggleButton = iconToggleButton;
+                    }
+                    
                     iconToggleButton.setText("On");
-
                     iconToggleButton.setBackground(new Color(0xB2D2B6));
                     panel.setBackground(new Color(0xE9EB87));
-
+                    activeToggleButton = iconToggleButton;
                 } else {
                     iconToggleButton.setText("Off");
                     iconToggleButton.setBackground(Color.WHITE);
                     panel.setBackground(Color.WHITE);
+                    activeToggleButton = null;
                 }
             }
 
