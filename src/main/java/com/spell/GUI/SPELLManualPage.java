@@ -24,6 +24,7 @@ import org.languagetool.rules.RuleMatch;
 
 import com.spell.Logic.CaseConverter;
 import com.spell.Logic.GrammarAndSpellingFixer;
+import com.spell.Logic.SPELLBasicLogics;
 import com.spell.Logic.SpaceAndLineRemover;
 
 public class SPELLManualPage extends SPELLPage implements ActionListener {
@@ -71,7 +72,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                     RuleMatch newMatch = checker.matches.get(i);
                     if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
                         outputTextArea
-                                .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch));
+                                .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch, "manual"));
                         outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
                         outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
                         break;
@@ -180,15 +181,13 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
             SPELLFrame.switchPage(SPELLFrame.homePage);
         } else if (e.getSource() == clearButton) {
             inputTextArea.setText("");
+            outputTextArea.setText("");
         } else if (e.getSource() == copyButton) {
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            StringSelection selection = new StringSelection(outputTextArea.getText());
-            clipboard.setContents(selection, null);
-            JOptionPane.showMessageDialog(null, "Text have been copied to clipboard.");
+            SPELLBasicLogics.copyFromTextArea(outputTextArea);
         } else if (comboBoxes.contains(e.getSource())) {
             if (e.getSource() == grammarComboBox) {
                 if (grammarComboBox.getSelectedIndex() == 0) {
-                    refreshLanguageToolChecker(inputText, outputTextArea);
+                    refreshLanguageToolChecker(inputText, outputTextArea, "manual");
                 }
             } else if (e.getSource() == casingComboBox) {
                 CaseConverter edit = new CaseConverter(inputText);
@@ -216,11 +215,20 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         }
     }
 
-    public static void refreshLanguageToolChecker(String inputText, JTextArea outputTextArea) {
-        checker = new GrammarAndSpellingFixer(inputText);
-        checker.buildGrammarAndSpellingChecker();
-        SPELLLineIndicators highlightErrors = new SPELLLineIndicators(inputText, outputTextArea, checker);
-        outputTextArea.setText(inputText);
-        highlightErrors.showHighlights();
+    public static void refreshLanguageToolChecker(String inputText, JTextArea outputTextArea, String page) {
+        if (page.equals("manual")) {
+            SPELLManualPage.checker = new GrammarAndSpellingFixer(inputText);
+            SPELLManualPage.checker.buildGrammarAndSpellingChecker();
+            SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea, SPELLManualPage.checker);
+            outputTextArea.setText(inputText);
+            highlightErrors.showHighlights();
+        } else if (page.equals("automatic")) {
+            SPELLAutomaticPage.checker = new GrammarAndSpellingFixer(inputText);
+            SPELLAutomaticPage.checker.buildGrammarAndSpellingChecker();
+            SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea, SPELLAutomaticPage.checker);
+            outputTextArea.setText(inputText);
+            highlightErrors.showHighlights();
+        }
+        
     }
 }

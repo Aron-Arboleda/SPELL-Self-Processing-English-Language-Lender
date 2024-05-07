@@ -6,6 +6,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.JTextArea;
+
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.language.AmericanEnglish;
@@ -14,6 +16,8 @@ import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.tools.Tools;
+
+import com.spell.GUI.SPELLHighlightIndicators;
 
 
 
@@ -44,6 +48,14 @@ public class GrammarAndSpellingFixer extends SPELLEditor {
 
         super.setText(textToCheck);
         return textToCheck;
+    }
+
+    public void refreshLanguageToolChecker(String inputText, JTextArea outputTextArea) {
+        GrammarAndSpellingFixer checker = new GrammarAndSpellingFixer(inputText);
+        checker.buildGrammarAndSpellingChecker();
+        SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea, this);
+        outputTextArea.setText(inputText);
+        highlightErrors.showHighlights();
     }
 }
 

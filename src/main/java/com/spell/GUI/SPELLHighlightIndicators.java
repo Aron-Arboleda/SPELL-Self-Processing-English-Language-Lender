@@ -12,17 +12,17 @@ import com.spell.Logic.GrammarAndSpellingFixer;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class SPELLLineIndicators {
+public class SPELLHighlightIndicators {
     Highlighter highlighter;
     ArrayList<DefaultHighlightPainter> painterList;
     GrammarAndSpellingFixer checker;
-    JTextArea outputtextArea;
+    JTextArea outputTextArea;
     String inputText;
 
-    public SPELLLineIndicators(String inputText, JTextArea outputtextArea, GrammarAndSpellingFixer checker) {
+    public SPELLHighlightIndicators(String inputText, JTextArea outputTextArea, GrammarAndSpellingFixer checker) {
         this.inputText = inputText;
-        this.outputtextArea = outputtextArea;
-        highlighter = outputtextArea.getHighlighter();
+        this.outputTextArea = outputTextArea;
+        highlighter = outputTextArea.getHighlighter();
         this.checker = checker;
         painterList = new ArrayList<DefaultHighlightPainter>();
         painterList.add(new DefaultHighlightPainter(Color.RED));

@@ -3,9 +3,12 @@ package com.spell.GUI;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import org.languagetool.rules.RuleMatch;
+
+import com.spell.Logic.GrammarAndSpellingFixer;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -50,7 +53,7 @@ class SPELLButton extends JButton {
         this.setToolTipText(tooltip);
         this.setFocusable(false);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
+        this.setBorder(BorderFactory.createLineBorder(foreColor, 1));
 
         final SPELLButton button = this;
         this.addMouseListener(new MouseAdapter() {
@@ -68,7 +71,7 @@ class SPELLButton extends JButton {
         });
     }
 
-    public void removeBorder(){
+    public void removeBorder() {
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 }
@@ -103,7 +106,7 @@ class OpaqueButton extends JButton {
 class SPELLLabel extends JLabel {
     public SPELLLabel(String text, int fontSize, Color foreColor) {
         this.setText(text);
-        this.setFont(new Font("Segoe UI Emoji", Font.PLAIN, fontSize));
+        this.setFont(new Font("Segoe UI", Font.PLAIN, fontSize));
         this.setForeground(foreColor);
     }
 }
@@ -116,10 +119,10 @@ class SPELLTextArea extends JTextArea {
         this.setForeground(foreColor);
         this.setLineWrap(true);
         this.setWrapStyleWord(true);
-        this.setCaretColor(Color.WHITE);
+        this.setCaretColor(foreColor);
     }
 
-    public static JPopupMenu createCustomContextMenu(final SPELLTextArea textArea, RuleMatch match) {
+    public static JPopupMenu createCustomContextMenu(final SPELLTextArea textArea, RuleMatch match, final String page) {
         JPopupMenu contextMenu = new JPopupMenu();
 
         int i = 0;
@@ -132,7 +135,7 @@ class SPELLTextArea extends JTextArea {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     textArea.replaceSelection(replacementText);
-                    SPELLManualPage.refreshLanguageToolChecker(textArea.getText(), textArea);
+                    SPELLManualPage.refreshLanguageToolChecker(textArea.getText(), textArea, page);
                 }
             });
             contextMenu.add(replacementMenu);
@@ -184,8 +187,6 @@ class SPELLComboBox extends JComboBox<String> {
 
     }
 }
-
-
 
 class FakeComboBox extends JPanel {
 
@@ -253,29 +254,83 @@ class SPELLTextField extends JTextField {
         this.setBackground(new Color(0x1B1E23));
         this.setCaretColor(Color.WHITE);
     }
-} 
+}
 // #region[rgba(0, 0, 0, 0.15)] Automatic Page Specific UI
 
 class SPELLAutoIconsPanel extends JPanel {
     String iconName;
     JToggleButton iconToggleButton;
+    static JToggleButton activeToggleButton;
 
-    public SPELLAutoIconsPanel(String iconName, Color background) {
+    public SPELLAutoIconsPanel(String iconName) {
         this.iconName = iconName;
         this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(200, 200));
-        this.setMinimumSize(this.getPreferredSize());
-        this.setMaximumSize(this.getPreferredSize());
-        this.setBackground(background);
+        this.setBackground(Color.WHITE);
+        this.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 4, 5, 2, true));
+
+        JPanel titleBar = new JPanel();
+        titleBar.setLayout(new FlowLayout(FlowLayout.CENTER));
+        titleBar.setBackground(new Color(255, 255, 255, 0));
+
+        SPELLLabel title = new SPELLLabel(iconName, 11, Color.BLACK);
+        titleBar.add(title);
+
 
         JPanel taskBar = new JPanel();
-        taskBar.setLayout(null);
-        taskBar.setBackground(background.darker());
+        taskBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        taskBar.setBackground(new Color(255, 255, 255, 0));
 
-        iconToggleButton = new JToggleButton("•");
-        iconToggleButton.setSize(15, 15);
+        iconToggleButton = new JToggleButton("Off");
+        iconToggleButton.setFont(new Font("Segoe UI", Font.PLAIN, 9));
+        iconToggleButton.setFocusable(false);
+        iconToggleButton.setBackground(Color.WHITE);
+        iconToggleButton.setPreferredSize(new Dimension(50, 25));
+
+        iconToggleButton.setUI(new BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                AbstractButton button = (AbstractButton) c;
+                ButtonModel model = button.getModel();
+
+                if (model.isSelected()) {
+                    button.setBackground(new Color(0xB2D2B6)); // Change background color to green when toggled
+                } else {
+                    button.setBackground(UIManager.getColor("Button.background")); // Use default background color when
+                                                                                   // untoggled
+                }
+
+                super.paint(g, c);
+            }
+        });
+
+        final SPELLAutoIconsPanel panel = this;
+
+        iconToggleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (iconToggleButton.getText().equals("Off")) {
+                    if (activeToggleButton != null) {
+                        activeToggleButton.doClick();
+                        activeToggleButton = iconToggleButton;
+                    }
+                    
+                    iconToggleButton.setText("On");
+                    iconToggleButton.setBackground(new Color(0xB2D2B6));
+                    panel.setBackground(new Color(0xE9EB87));
+                    activeToggleButton = iconToggleButton;
+                } else {
+                    iconToggleButton.setText("Off");
+                    iconToggleButton.setBackground(Color.WHITE);
+                    panel.setBackground(Color.WHITE);
+                    activeToggleButton = null;
+                }
+            }
+
+            
+        });
         taskBar.add(iconToggleButton);
 
+        this.add(titleBar, BorderLayout.NORTH);
         this.add(taskBar, BorderLayout.SOUTH);
     }
 }
