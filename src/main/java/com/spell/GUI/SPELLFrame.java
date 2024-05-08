@@ -14,9 +14,9 @@ public class SPELLFrame extends JFrame implements ActionListener {
     static SPELLPage homePage, manualPage, automaticPage, iPage;
     ArrayList<SPELLPage> pagesList = new ArrayList<SPELLPage>();
     static SPELLPage ACTIVEPAGE;
-    static Image manualBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/BlackBoardManual.jpg")))
+    static Image manualBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/images/BlackBoardManual.jpg")))
             .getImage();
-    static Image autoBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/WhiteBoardAutomatic.jpg")))
+    static Image autoBackgroundImage = (new ImageIcon(SPELLPage.class.getResource("/images/WhiteBoardAutomatic.jpg")))
             .getImage();
 
     OpaqueButton manualButton, automaticButton, instructionsButton;

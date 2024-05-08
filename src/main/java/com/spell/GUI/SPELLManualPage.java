@@ -35,7 +35,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
     ArrayList<SPELLComboBox> comboBoxes = new ArrayList<SPELLComboBox>();
     SPELLButton clearButton, copyButton;
 
-    static Image manualEditorBackImage = (new ImageIcon(SPELLPage.class.getResource("/ManualEditorBackground.jpg")))
+    static Image manualEditorBackImage = (new ImageIcon(SPELLPage.class.getResource("/images/ManualEditorBackground.jpg")))
             .getImage();
 
     SPELLButton manualButton, manualBackButton;

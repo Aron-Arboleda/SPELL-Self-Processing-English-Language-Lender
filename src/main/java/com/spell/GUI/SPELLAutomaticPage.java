@@ -31,7 +31,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
     static GrammarAndSpellingFixer checker;
 
     static Image automaticEditorBackImage = (new ImageIcon(
-            SPELLPage.class.getResource("/AutomaticEditorBackground.jpg"))).getImage();
+            SPELLPage.class.getResource("/images/AutomaticEditorBackground.jpg"))).getImage();
 
     public SPELLAutomaticPage(String name, Color background) {
         super(name, background);
@@ -46,30 +46,30 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         automaticBackButton.setIcon(backButtonIcon);
         automaticBackButton.addActionListener(this);
 
-        alphabetizerPanel = new SPELLAutoIconsPanel("Sort Alphabetically");
+        alphabetizerPanel = new SPELLAutoIconsPanel("Sort Alphabetically", 150, 150, "sortAlphabeticalIcon.png");
         alphabetizerPanel.setBounds(60, 120, 150, 150);
-        reverseAlphabetizerPanel = new SPELLAutoIconsPanel("Reverse Alphabet");
+        reverseAlphabetizerPanel = new SPELLAutoIconsPanel("Reverse Alphabet", 150, 150, "reverseAlphabeticalIcon.png");
         reverseAlphabetizerPanel.setBounds(230, 120, 150, 150);
 
-        upperCasePanel = new SPELLAutoIconsPanel("Upper Case");
+        upperCasePanel = new SPELLAutoIconsPanel("Upper Case", 90, 90, "upperCaseIcon.png");
         upperCasePanel.setBounds(820, 100, 90, 90);
-        lowerCasePanel = new SPELLAutoIconsPanel("Lower Case");
+        lowerCasePanel = new SPELLAutoIconsPanel("Lower Case", 90, 90, "lowerCaseIcon.png");
         lowerCasePanel.setBounds(930, 100, 90, 90);
-        camelCasingPanel = new SPELLAutoIconsPanel("Camel Casing");
+        camelCasingPanel = new SPELLAutoIconsPanel("Camel Casing", 90, 90, "camelCasingIcon.png");
         camelCasingPanel.setBounds(1040, 100, 90, 90);
-        sentenceCasePanel = new SPELLAutoIconsPanel("Sentence Case");
+        sentenceCasePanel = new SPELLAutoIconsPanel("Sentence Case", 90, 90, "sentenceCaseIcon.png");
         sentenceCasePanel.setBounds(870, 210, 90, 90);
-        capitalizedCasePanel = new SPELLAutoIconsPanel("Capitalized Case");
+        capitalizedCasePanel = new SPELLAutoIconsPanel("Capitalized Case", 90, 90, "capitalizedCaseIcon.png");
         capitalizedCasePanel.setBounds(980, 210, 90, 90);
 
-        removeLineBreaksPanel = new SPELLAutoIconsPanel("Remove Line Breaks");
+        removeLineBreaksPanel = new SPELLAutoIconsPanel("Remove Line Breaks", 140, 140, "lineBreaksRemoverIcon.png");
         removeLineBreaksPanel.setBounds(830, 430, 140, 140);
-        removeSpacesPanel = new SPELLAutoIconsPanel("Remove Spaces");
+        removeSpacesPanel = new SPELLAutoIconsPanel("Remove Spaces", 140, 140, "spaceRemoverIcon.png");
         removeSpacesPanel.setBounds(1000, 430, 140, 140);
 
-        bulletAdderPanel = new SPELLAutoIconsPanel("Add Bullets");
+        bulletAdderPanel = new SPELLAutoIconsPanel("Add Bullets", 150, 150, "bulletAdderIcon.png");
         bulletAdderPanel.setBounds(60, 430, 150, 150);
-        bulletRemoverPanel = new SPELLAutoIconsPanel("Remove Bullets");
+        bulletRemoverPanel = new SPELLAutoIconsPanel("Remove Bullets", 150, 150, "bulletRemoverIcon.png");
         bulletRemoverPanel.setBounds(230, 430, 150, 150);
 
         grammarAndSpellingArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),

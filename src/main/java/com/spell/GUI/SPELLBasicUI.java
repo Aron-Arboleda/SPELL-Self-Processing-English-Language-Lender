@@ -1,18 +1,41 @@
 package com.spell.GUI;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import org.languagetool.rules.RuleMatch;
-
-import com.spell.Logic.GrammarAndSpellingFixer;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
 
 class SPELLPage extends JPanel {
     String pageName;
@@ -36,7 +59,7 @@ class SPELLPage extends JPanel {
     }
 
     public static ImageIcon newScaledImage(String imageName, int width, int height) {
-        ImageIcon image = new ImageIcon(SPELLPage.class.getResource("/" + imageName));
+        ImageIcon image = new ImageIcon(SPELLPage.class.getResource("/images/" + imageName));
         ImageIcon scaledImage = new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
         return scaledImage;
     }
@@ -261,12 +284,18 @@ class SPELLAutoIconsPanel extends JPanel {
     String iconName;
     JToggleButton iconToggleButton;
     static JToggleButton activeToggleButton;
+    private Image backgroundImage;
 
-    public SPELLAutoIconsPanel(String iconName) {
+    public SPELLAutoIconsPanel(String iconName, int width, int height, String iconImageName) {
         this.iconName = iconName;
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 4, 5, 2, true));
+        this.setSize(width, height);
+        
+        ImageIcon panelBackgroundImage = SPELLPage.newScaledImage("AutomaticPageIcons/" + iconImageName, width, height);
+        //ImageIcon panelBackgroundImage = new ImageIcon(SPELLPage.class.getResource("/images/AutomaticPageIcons/" + iconImageName));
+        this.backgroundImage = panelBackgroundImage.getImage();
 
         JPanel titleBar = new JPanel();
         titleBar.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -330,8 +359,13 @@ class SPELLAutoIconsPanel extends JPanel {
         });
         taskBar.add(iconToggleButton);
 
-        this.add(titleBar, BorderLayout.NORTH);
         this.add(taskBar, BorderLayout.SOUTH);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
 // #endregion
