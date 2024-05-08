@@ -25,10 +25,12 @@ public class CaseConverter extends SPELLEditor {
 
         sbEditor.setCharAt(0, Character.toLowerCase(sbEditor.charAt(0)));
 
-        for(int i = 0; i < sbEditor.length(); i++){
+        int total = sbEditor.length();
+        for(int i = 0; i < total; i++){
             if(Character.isWhitespace(sbEditor.charAt(i))){
                 sbEditor.deleteCharAt(i);
                 sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
+                total--;
             }
         }
 
@@ -45,10 +47,8 @@ public class CaseConverter extends SPELLEditor {
         sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));
         for(int i = 0; i < sbEditor.length(); i++) {
             if ((i != sbEditor.length() - 1) && (sbEditor.charAt(i) == '.' || sbEditor.charAt(i) == '?' || sbEditor.charAt(i) == '!')) {
-                if(Character.isWhitespace(sbEditor.charAt(i + 1))) {
-                    i++;
-                }
-                sbEditor.setCharAt(i + 1, Character.toUpperCase(sbEditor.charAt(i + 1)));
+                sbEditor.setCharAt(i + 2, Character.toUpperCase(sbEditor.charAt(i + 2)));
+                i = i + 3;
             }
         }
             text = sbEditor.toString();
