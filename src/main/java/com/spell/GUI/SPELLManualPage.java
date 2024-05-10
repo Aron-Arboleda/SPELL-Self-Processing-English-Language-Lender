@@ -24,7 +24,8 @@ import org.languagetool.rules.RuleMatch;
 
 import com.spell.Logic.CaseConverter;
 import com.spell.Logic.GrammarAndSpellingFixer;
-import com.spell.Logic.SPELLBasicLogics;
+import com.spell.Logic.ClipboardListener;
+import com.spell.Logic.ClipboardListener;
 import com.spell.Logic.SpaceAndLineRemover;
 
 public class SPELLManualPage extends SPELLPage implements ActionListener {
@@ -183,7 +184,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
             inputTextArea.setText("");
             outputTextArea.setText("");
         } else if (e.getSource() == copyButton) {
-            SPELLBasicLogics.copyFromTextArea(outputTextArea);
+            ClipboardListener.copyFromTextArea(outputTextArea);
         } else if (comboBoxes.contains(e.getSource())) {
             if (e.getSource() == grammarComboBox) {
                 if (grammarComboBox.getSelectedIndex() == 0) {
