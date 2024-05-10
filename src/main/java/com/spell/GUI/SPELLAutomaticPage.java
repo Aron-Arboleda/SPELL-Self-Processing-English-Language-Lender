@@ -9,15 +9,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
 import org.languagetool.rules.RuleMatch;
 
+import com.spell.Logic.CaseConverter;
+import com.spell.Logic.ClipboardListener;
 import com.spell.Logic.GrammarAndSpellingFixer;
-import com.spell.Logic.SPELLBasicLogics;
 
 public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
     // Automatic Page Components
@@ -53,24 +54,33 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
 
         upperCasePanel = new SPELLAutoIconsPanel("Upper Case", 90, 90, "upperCaseIcon.png");
         upperCasePanel.setBounds(820, 100, 90, 90);
+        upperCasePanel.iconToggleButton.addActionListener(this);
         lowerCasePanel = new SPELLAutoIconsPanel("Lower Case", 90, 90, "lowerCaseIcon.png");
         lowerCasePanel.setBounds(930, 100, 90, 90);
+        lowerCasePanel.iconToggleButton.addActionListener(this);
         camelCasingPanel = new SPELLAutoIconsPanel("Camel Casing", 90, 90, "camelCasingIcon.png");
         camelCasingPanel.setBounds(1040, 100, 90, 90);
+        camelCasingPanel.iconToggleButton.addActionListener(this);
         sentenceCasePanel = new SPELLAutoIconsPanel("Sentence Case", 90, 90, "sentenceCaseIcon.png");
         sentenceCasePanel.setBounds(870, 210, 90, 90);
+        sentenceCasePanel.iconToggleButton.addActionListener(this);
         capitalizedCasePanel = new SPELLAutoIconsPanel("Capitalized Case", 90, 90, "capitalizedCaseIcon.png");
         capitalizedCasePanel.setBounds(980, 210, 90, 90);
+        capitalizedCasePanel.iconToggleButton.addActionListener(this);
 
         removeLineBreaksPanel = new SPELLAutoIconsPanel("Remove Line Breaks", 140, 140, "lineBreaksRemoverIcon.png");
         removeLineBreaksPanel.setBounds(830, 430, 140, 140);
+        removeLineBreaksPanel.iconToggleButton.addActionListener(this);
         removeSpacesPanel = new SPELLAutoIconsPanel("Remove Spaces", 140, 140, "spaceRemoverIcon.png");
         removeSpacesPanel.setBounds(1000, 430, 140, 140);
+        removeSpacesPanel.iconToggleButton.addActionListener(this);
 
         bulletAdderPanel = new SPELLAutoIconsPanel("Add Bullets", 150, 150, "bulletAdderIcon.png");
         bulletAdderPanel.setBounds(60, 430, 150, 150);
+        bulletAdderPanel.iconToggleButton.addActionListener(this);
         bulletRemoverPanel = new SPELLAutoIconsPanel("Remove Bullets", 150, 150, "bulletRemoverIcon.png");
         bulletRemoverPanel.setBounds(230, 430, 150, 150);
+        bulletRemoverPanel.iconToggleButton.addActionListener(this);
 
         grammarAndSpellingArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 Color.WHITE, Color.BLACK);
@@ -135,9 +145,33 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         if (e.getSource() == automaticBackButton) {
             SPELLFrame.switchPage(SPELLFrame.homePage);
         } else if (e.getSource() == copyButton) {
-            SPELLBasicLogics.copyFromTextArea(grammarAndSpellingArea);
+            ClipboardListener.copyFromTextArea(grammarAndSpellingArea);
         } else if (e.getSource() == grammarCheckButton) {
             SPELLManualPage.refreshLanguageToolChecker(grammarAndSpellingArea.getText(), grammarAndSpellingArea, "automatic");
+        } else if (e.getSource() instanceof JToggleButton) {
+            ClipboardListener clip = null;
+            if (e.getSource() == upperCasePanel.iconToggleButton) {
+                clip = new ClipboardListener("upperCase", upperCasePanel.iconToggleButton);
+            } else if (e.getSource() == lowerCasePanel.iconToggleButton) {
+                clip = new ClipboardListener("lowerCase", lowerCasePanel.iconToggleButton);
+            } else if (e.getSource() == camelCasingPanel.iconToggleButton) {
+                clip = new ClipboardListener("camelCasing", camelCasingPanel.iconToggleButton);
+            } else if (e.getSource() == sentenceCasePanel.iconToggleButton) {
+                clip = new ClipboardListener("sentenceCase", sentenceCasePanel.iconToggleButton);
+            } else if (e.getSource() == capitalizedCasePanel.iconToggleButton) {
+                clip = new ClipboardListener("capitalizedCase", capitalizedCasePanel.iconToggleButton);
+            } else if (e.getSource() == removeLineBreaksPanel.iconToggleButton) {
+                clip = new ClipboardListener("removeLineBreaks", removeLineBreaksPanel.iconToggleButton);
+            } else if (e.getSource() == removeSpacesPanel.iconToggleButton) {
+                clip = new ClipboardListener("removeSpaces", removeSpacesPanel.iconToggleButton);
+            }
+            
+            
+            
+            else {
+                System.out.println("Button Doesn't exist.");
+            }
+            clip.start();
         }
     }
 }
