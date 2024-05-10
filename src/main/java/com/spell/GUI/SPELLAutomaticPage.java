@@ -1,6 +1,7 @@
 package com.spell.GUI;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
@@ -10,7 +11,9 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
@@ -27,6 +30,8 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             bulletRemoverPanel;
 
     SPELLButton automaticBackButton, grammarCheckButton, copyButton, resetButton;
+    JComboBox bulletDesignComboBox;
+    JTextField bulletTextField;
 
     SPELLTextArea grammarAndSpellingArea;
     static GrammarAndSpellingFixer checker;
@@ -78,9 +83,30 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         bulletAdderPanel = new SPELLAutoIconsPanel("Add Bullets", 150, 150, "bulletAdderIcon.png");
         bulletAdderPanel.setBounds(60, 430, 150, 150);
         bulletAdderPanel.iconToggleButton.addActionListener(this);
+        
+        String[] bulletCBOptions = { "a.)", "1.", "•", "-", "▪", "▫", "◦", "◆", "◇", "◈", "✓" };
+        bulletDesignComboBox = new JComboBox(bulletCBOptions);
+        //bulletDesignComboBox
+                //.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
+                        //BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+        bulletDesignComboBox.setPreferredSize(new Dimension(50, 25));
+        bulletDesignComboBox.setFocusable(false);
+        bulletDesignComboBox.setBackground(Color.white);
+        
+        bulletAdderPanel.taskBar.remove(bulletAdderPanel.iconToggleButton);
+        bulletAdderPanel.taskBar.add(bulletDesignComboBox);
+        bulletAdderPanel.taskBar.add(bulletAdderPanel.iconToggleButton);
+
         bulletRemoverPanel = new SPELLAutoIconsPanel("Remove Bullets", 150, 150, "bulletRemoverIcon.png");
         bulletRemoverPanel.setBounds(230, 430, 150, 150);
         bulletRemoverPanel.iconToggleButton.addActionListener(this);
+
+        bulletTextField = new JTextField();
+        bulletTextField.setPreferredSize(new Dimension(50, 25));
+        bulletRemoverPanel.taskBar.remove(bulletRemoverPanel.iconToggleButton);
+        bulletRemoverPanel.taskBar.add(bulletTextField);
+        bulletRemoverPanel.taskBar.add(bulletRemoverPanel.iconToggleButton);
+        
 
         grammarAndSpellingArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 Color.WHITE, Color.BLACK);

@@ -235,7 +235,7 @@ class FakeComboBox extends JPanel {
         });
 
         SPELLLabel bulletLabel = new SPELLLabel("Bullet Editor", 16, Color.WHITE);
-        bulletLabel.setBounds(22, 10, 100, 35);
+        bulletLabel.setBounds(22, 5, 100, 35);
 
         JButton arrowButton = new BasicArrowButton(SwingConstants.SOUTH);
         arrowButton.setBackground(new Color(0x1B1E23));
@@ -285,6 +285,7 @@ class SPELLAutoIconsPanel extends JPanel {
     JToggleButton iconToggleButton;
     static JToggleButton activeToggleButton;
     private Image backgroundImage;
+    JPanel taskBar;
 
     public SPELLAutoIconsPanel(String iconName, int width, int height, String iconImageName) {
         this.iconName = iconName;
@@ -305,7 +306,7 @@ class SPELLAutoIconsPanel extends JPanel {
         titleBar.add(title);
 
 
-        JPanel taskBar = new JPanel();
+        taskBar = new JPanel();
         taskBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
         taskBar.setBackground(new Color(255, 255, 255, 0));
 
@@ -314,6 +315,7 @@ class SPELLAutoIconsPanel extends JPanel {
         iconToggleButton.setFocusable(false);
         iconToggleButton.setBackground(Color.WHITE);
         iconToggleButton.setPreferredSize(new Dimension(50, 25));
+        iconToggleButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         iconToggleButton.setUI(new BasicButtonUI() {
             @Override

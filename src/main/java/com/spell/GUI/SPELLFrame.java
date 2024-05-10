@@ -28,6 +28,8 @@ public class SPELLFrame extends JFrame implements ActionListener {
         this.setSize(1225, 715);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        ImageIcon logo = new ImageIcon(SPELLFrame.class.getResource("/images/SPELLLogo.png"));
+        this.setIconImage(logo.getImage());
         this.getContentPane().setBackground(Color.white);
 
         // #region[rgba(30, 87, 75, 0.15)] Home Page
