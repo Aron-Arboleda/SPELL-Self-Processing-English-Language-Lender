@@ -65,18 +65,21 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
 
         outputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 new Color(0x22252A), Color.WHITE);
+        outputTextArea.setEditable(false);
         outputTextArea.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-                int position = outputTextArea.viewToModel2D(e.getPoint());
-                for (int i = 0; i < checker.matches.size(); i++) {
-                    RuleMatch newMatch = checker.matches.get(i);
-                    if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
-                        outputTextArea
-                                .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch, "manual"));
-                        outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
-                        outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
-                        break;
+                if (checker != null) {
+                    int position = outputTextArea.viewToModel2D(e.getPoint());
+                    for (int i = 0; i < checker.matches.size(); i++) {
+                        RuleMatch newMatch = checker.matches.get(i);
+                        if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
+                            outputTextArea
+                                    .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch, "manual"));
+                            outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
+                            outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
+                            break;
+                        }
                     }
                 }
             }

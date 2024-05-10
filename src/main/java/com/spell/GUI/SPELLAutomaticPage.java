@@ -26,7 +26,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             sentenceCasePanel, capitalizedCasePanel, removeLineBreaksPanel, removeSpacesPanel, bulletAdderPanel,
             bulletRemoverPanel;
 
-    SPELLButton automaticBackButton, grammarCheckButton, copyButton;
+    SPELLButton automaticBackButton, grammarCheckButton, copyButton, resetButton;
 
     SPELLTextArea grammarAndSpellingArea;
     static GrammarAndSpellingFixer checker;
@@ -113,6 +113,9 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         grammarCheckButton = new SPELLButton("Check Grammar", 12, Color.white, Color.black, "Check Grammar");
         grammarCheckButton.setBounds(485, 495, 100, 30);
         grammarCheckButton.addActionListener(this);
+        resetButton = new SPELLButton("Reset", 12, Color.white, Color.black, "Reset Text Area");
+        resetButton.setBounds(615, 495, 50, 30);
+        resetButton.addActionListener(this);
         copyButton = new SPELLButton("Copy", 12, Color.white, Color.black, "Copy");
         copyButton.setBounds(675, 495, 50, 30);
         copyButton.addActionListener(this);
@@ -136,6 +139,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
 
         this.add(grammarAndSpellingAreaPane);
         this.add(grammarCheckButton);
+        this.add(resetButton);
         this.add(copyButton);
 
     }
@@ -146,7 +150,11 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             SPELLFrame.switchPage(SPELLFrame.homePage);
         } else if (e.getSource() == copyButton) {
             ClipboardListener.copyFromTextArea(grammarAndSpellingArea);
+        } else if (e.getSource() == resetButton) {
+            grammarAndSpellingArea.setText("");
+            grammarAndSpellingArea.setEditable(true);
         } else if (e.getSource() == grammarCheckButton) {
+            grammarAndSpellingArea.setEditable(false);
             SPELLManualPage.refreshLanguageToolChecker(grammarAndSpellingArea.getText(), grammarAndSpellingArea, "automatic");
         } else if (e.getSource() instanceof JToggleButton) {
             ClipboardListener clip = null;
