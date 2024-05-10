@@ -1,43 +1,14 @@
 package com.spell.Logic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class PerLineEditor extends SPELLEditor {
-    public String[] splitedText;
+    public String[] parsedText;
     public PerLineEditor(String textToEdit) {
         super(textToEdit);
-        splitedText = textToEdit.split("\\R");
-    }
-}
-
-class BulletsEditor extends PerLineEditor {
-
-    public BulletsEditor(String textToEdit) {
-        super(textToEdit);
-    }
-
-    public String addBullets() {
-        String text = super.excessSpaceRemover();
-        text.replaceAll("\n", "\n• ");
-        return text;
-    }
-
-    public String removeBullets() {
-        String text = super.excessSpaceRemover();
-        text = text.replaceAll("•", "");
-        return text;
-    }
-}
-
-class Alphabetizer extends PerLineEditor {
-    public Alphabetizer(String textToEdit) {
-        super(textToEdit);
-    }
-
-    public void sortAlphabetically() {
-        // ...
-    }
-
-    public void sortReverseAlphabetically() {
-        // ...
+        parsedText = textToEdit.split("\n");
     }
 }
 
