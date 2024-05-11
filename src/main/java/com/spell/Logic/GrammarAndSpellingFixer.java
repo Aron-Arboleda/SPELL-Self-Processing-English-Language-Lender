@@ -1,21 +1,14 @@
 package com.spell.Logic;
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JTextArea;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.language.AmericanEnglish;
-import org.languagetool.language.BritishEnglish;
-import org.languagetool.rules.CategoryId;
-import org.languagetool.rules.Rule;
 import org.languagetool.rules.RuleMatch;
-import org.languagetool.tools.Tools;
 
 import com.spell.GUI.SPELLHighlightIndicators;
 

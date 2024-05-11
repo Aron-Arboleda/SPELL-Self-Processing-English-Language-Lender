@@ -19,7 +19,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.languagetool.rules.RuleMatch;
 
-import com.spell.Logic.CaseConverter;
 import com.spell.Logic.ClipboardListener;
 import com.spell.Logic.GrammarAndSpellingFixer;
 
@@ -30,7 +29,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             bulletRemoverPanel;
 
     SPELLButton automaticBackButton, grammarCheckButton, copyButton, resetButton;
-    JComboBox bulletDesignComboBox;
+    JComboBox<String> bulletDesignComboBox;
     JTextField bulletTextField;
 
     SPELLTextArea grammarAndSpellingArea;
@@ -85,7 +84,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         bulletAdderPanel.iconToggleButton.addActionListener(this);
         
         String[] bulletCBOptions = { "a.)", "1.", "•", "-", "▪", "▫", "◦", "◆", "◇", "◈", "✓" };
-        bulletDesignComboBox = new JComboBox(bulletCBOptions);
+        bulletDesignComboBox = new JComboBox<String>(bulletCBOptions);
         //bulletDesignComboBox
                 //.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
                         //BorderFactory.createEmptyBorder(0, 10, 0, 0)));

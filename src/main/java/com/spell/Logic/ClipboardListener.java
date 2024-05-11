@@ -5,7 +5,6 @@ import java.awt.datatransfer.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -33,7 +32,7 @@ public class ClipboardListener extends Thread {
         while (toggleButton.isSelected()) {
             detectClipboardChanges();
             try {
-                this.sleep(1000);
+                this.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

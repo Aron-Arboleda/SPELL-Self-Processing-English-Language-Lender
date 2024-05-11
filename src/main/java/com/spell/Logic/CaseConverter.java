@@ -1,7 +1,5 @@
 package com.spell.Logic;
 
-import java.util.regex.*;
-
 public class CaseConverter extends SPELLEditor {
     public CaseConverter(String textToEdit) {
         super(textToEdit);
