@@ -23,9 +23,9 @@ public class BulletsEditor extends PerLineEditor {
     }
 
     public String removeBullets() {
-        String text = super.excessSpaceRemover();
-        text = text.replaceAll("•", "");
-        return text;
+        super.setText(super.excessSpaceRemover());
+        super.setText(super.getText().replaceAll(bulletDesign + " ", ""));
+        return super.getText();
     }
 
     public static void callMethod(BulletsEditor instance, String methodName, String input) {
