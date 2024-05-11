@@ -12,13 +12,46 @@ public class BulletsEditor extends PerLineEditor {
 
     public String addBullets() {
         String text = super.excessSpaceRemover();
+        text = text.replaceAll("\n", "\n" + "## ");
+
+        if (bulletDesign.equals("a.)")) {
+            int i = 98;
+            int y = 0;
+            char letter, letter2;
+
+            while (text.contains("##")) {
+                if (y == 0) {
+                    letter = (char) i;
+                    text = text.replaceFirst("##", letter + ".)");
+                    i++;
+
+                    if (i == 123){
+                        y = 65;
+                        i = 97;
+                    }
+                } else {
+                    letter2 = (char) y;
+                    letter = (char) i;
+                    text = text.replaceFirst("##", letter2 + "" + letter + ".)");
+                    i++;
+
+                    if (i == 123) {
+                        y++;
+                        i = 97;
+                    }
+
+                    if (y == 91) {
+                        i = 97;
+                        y = 0;
+                    }
+                }
+            }
+        }
 
         sbEditor.append(text);
         sbEditor.insert(0, bulletDesign + " ");
-        text = sbEditor.toString();
+        super.setText(sbEditor.toString());
         sbEditor.delete(0, sbEditor.length());
-
-        super.setText(text.replaceAll("\n", "\n" + bulletDesign + " "));
         return super.getText();
     }
 
