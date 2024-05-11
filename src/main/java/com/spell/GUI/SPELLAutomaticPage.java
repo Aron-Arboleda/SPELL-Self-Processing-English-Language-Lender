@@ -29,8 +29,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             bulletRemoverPanel;
 
     SPELLButton automaticBackButton, grammarCheckButton, copyButton, resetButton;
-    JComboBox<String> bulletDesignComboBox;
-    JTextField bulletTextField;
+    JComboBox<String> bulletDesignToAddCB, bulletDesignToRemoveCB;
 
     SPELLTextArea grammarAndSpellingArea;
     static GrammarAndSpellingFixer checker;
@@ -84,26 +83,25 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         bulletAdderPanel.iconToggleButton.addActionListener(this);
         
         String[] bulletCBOptions = { "a.)", "1.", "•", "-", "▪", "▫", "◦", "◆", "◇", "◈", "✓" };
-        bulletDesignComboBox = new JComboBox<String>(bulletCBOptions);
-        //bulletDesignComboBox
-                //.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
-                        //BorderFactory.createEmptyBorder(0, 10, 0, 0)));
-        bulletDesignComboBox.setPreferredSize(new Dimension(50, 25));
-        bulletDesignComboBox.setFocusable(false);
-        bulletDesignComboBox.setBackground(Color.white);
+        bulletDesignToAddCB = new JComboBox<String>(bulletCBOptions);
+        bulletDesignToAddCB.setPreferredSize(new Dimension(50, 25));
+        bulletDesignToAddCB.setFocusable(false);
+        bulletDesignToAddCB.setBackground(Color.white);
         
         bulletAdderPanel.taskBar.remove(bulletAdderPanel.iconToggleButton);
-        bulletAdderPanel.taskBar.add(bulletDesignComboBox);
+        bulletAdderPanel.taskBar.add(bulletDesignToAddCB);
         bulletAdderPanel.taskBar.add(bulletAdderPanel.iconToggleButton);
 
         bulletRemoverPanel = new SPELLAutoIconsPanel("Remove Bullets", 150, 150, "bulletRemoverIcon.png");
         bulletRemoverPanel.setBounds(230, 430, 150, 150);
         bulletRemoverPanel.iconToggleButton.addActionListener(this);
 
-        bulletTextField = new JTextField();
-        bulletTextField.setPreferredSize(new Dimension(50, 25));
+        bulletDesignToRemoveCB = new JComboBox<String>(bulletCBOptions);
+        bulletDesignToRemoveCB.setPreferredSize(new Dimension(50, 25));
+        bulletDesignToRemoveCB.setFocusable(false);
+        bulletDesignToRemoveCB.setBackground(Color.white);
         bulletRemoverPanel.taskBar.remove(bulletRemoverPanel.iconToggleButton);
-        bulletRemoverPanel.taskBar.add(bulletTextField);
+        bulletRemoverPanel.taskBar.add(bulletDesignToRemoveCB);
         bulletRemoverPanel.taskBar.add(bulletRemoverPanel.iconToggleButton);
         
 
