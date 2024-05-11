@@ -24,6 +24,9 @@ public class BulletsEditor extends PerLineEditor {
 
     public String removeBullets() {
         super.setText(super.excessSpaceRemover());
+        if (!(super.getText().contains(bulletDesign + " "))){
+            return super.getText();
+        }
         super.setText(super.getText().replaceAll(bulletDesign + " ", ""));
         return super.getText();
     }
