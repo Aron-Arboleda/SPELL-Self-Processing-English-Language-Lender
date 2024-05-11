@@ -1,5 +1,8 @@
 package com.spell.Logic;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class SpaceAndLineRemover extends SPELLEditor {
     public SpaceAndLineRemover(String textToEdit) {
         super(textToEdit);
@@ -16,5 +19,14 @@ public class SpaceAndLineRemover extends SPELLEditor {
         super.setText(text.replaceAll("\n", ""));
         super.setText(text.replaceAll(" ", ""));
         return text;
+    }
+
+    public static void callMethod(SpaceAndLineRemover instance, String methodName, String input) {
+        try {
+            Method method = SpaceAndLineRemover.class.getMethod(methodName);
+            method.invoke(instance);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -52,8 +52,10 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
 
         alphabetizerPanel = new SPELLAutoIconsPanel("Sort Alphabetically", 150, 150, "sortAlphabeticalIcon.png");
         alphabetizerPanel.setBounds(60, 120, 150, 150);
+        alphabetizerPanel.iconToggleButton.addActionListener(this);
         reverseAlphabetizerPanel = new SPELLAutoIconsPanel("Reverse Alphabet", 150, 150, "reverseAlphabeticalIcon.png");
         reverseAlphabetizerPanel.setBounds(230, 120, 150, 150);
+        reverseAlphabetizerPanel.iconToggleButton.addActionListener(this);
 
         upperCasePanel = new SPELLAutoIconsPanel("Upper Case", 90, 90, "upperCaseIcon.png");
         upperCasePanel.setBounds(820, 100, 90, 90);
@@ -195,7 +197,17 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
                 clip = new ClipboardListener("removeLineBreaks", removeLineBreaksPanel.iconToggleButton);
             } else if (e.getSource() == removeSpacesPanel.iconToggleButton) {
                 clip = new ClipboardListener("removeSpaces", removeSpacesPanel.iconToggleButton);
-            }
+            } else if (e.getSource() == alphabetizerPanel.iconToggleButton) {
+                clip = new ClipboardListener("sortAlphabetically", alphabetizerPanel.iconToggleButton);
+            } else if (e.getSource() == reverseAlphabetizerPanel.iconToggleButton) {
+                clip = new ClipboardListener("sortReverseAlphabetically", reverseAlphabetizerPanel.iconToggleButton);
+            } 
+            /*
+            else if (e.getSource() == bulletAdderPanel.iconToggleButton) {
+                clip = new ClipboardListener("bulletAdder", bulletAdderPanel.iconToggleButton);
+            } else if (e.getSource() == bulletRemoverPanel.iconToggleButton) {
+                clip = new ClipboardListener("bulletRemover", bulletRemoverPanel.iconToggleButton);
+            } */
             
             
             

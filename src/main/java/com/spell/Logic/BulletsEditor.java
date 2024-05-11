@@ -1,5 +1,8 @@
 package com.spell.Logic;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class BulletsEditor extends PerLineEditor {
     public String bulletDesign;
     public BulletsEditor(String textToEdit, String bulletDesign) {
@@ -23,5 +26,14 @@ public class BulletsEditor extends PerLineEditor {
         String text = super.excessSpaceRemover();
         text = text.replaceAll("•", "");
         return text;
+    }
+
+    public static void callMethod(BulletsEditor instance, String methodName, String input) {
+        try {
+            Method method = BulletsEditor.class.getMethod(methodName);
+            method.invoke(instance);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }

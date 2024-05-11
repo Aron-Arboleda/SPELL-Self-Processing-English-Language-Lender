@@ -3,8 +3,10 @@ package com.spell.Logic;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -12,14 +14,14 @@ import javax.swing.JToggleButton;
 
 public class ClipboardListener extends Thread {
     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
-    String editor;
+    String methodName;
     String prevClipboardContent = null;
     String output = null;
     JToggleButton toggleButton;
-    
+    Class<?>[] classes = {CaseConverter.class, SpaceAndLineRemover.class, Alphabetizer.class, BulletsEditor.class};
 
-    public ClipboardListener(String editor, JToggleButton toggleButton) {
-        this.editor = editor;
+    public ClipboardListener(String methodName, JToggleButton toggleButton) {
+        this.methodName = methodName;
         this.toggleButton = toggleButton;
     }
 
@@ -63,36 +65,29 @@ public class ClipboardListener extends Thread {
     }
 
     String processInput(String input) {
-        if (editor.equals("upperCase") || editor.equals("lowerCase") || editor.equals("sentenceCase")
-            || editor.equals("camelCasing") || editor.equals("capitalizedCase")) {
-            CaseConverter caseEditor = new CaseConverter(input);
-            Method method;
-            try {
-                method = CaseConverter.class.getMethod(editor);
-                method.invoke(caseEditor);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-            return caseEditor.getText();
-        } else if (editor.equals("removeLineBreaks") || editor.equals("removeSpaces")){
-            SpaceAndLineRemover spaceEditor = new SpaceAndLineRemover(input);
-            Method method;
-            try {
-                method = SpaceAndLineRemover.class.getMethod(editor);
-                method.invoke(spaceEditor);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-            return spaceEditor.getText();
-        } else {
+        if (methodName.equals("upperCase") || methodName.equals("lowerCase") || methodName.equals("sentenceCase")
+            || methodName.equals("camelCasing") || methodName.equals("capitalizedCase")) {
+            CaseConverter editor = new CaseConverter(input);
+            CaseConverter.callMethod(editor, methodName, input);
+            return editor.getText();
+        } else if (methodName.equals("removeLineBreaks") || methodName.equals("removeSpaces")){
+            SpaceAndLineRemover editor = new SpaceAndLineRemover(input);
+            SpaceAndLineRemover.callMethod(editor, methodName, input);
+            return editor.getText();
+        } else if (methodName.equals("sortAlphabetically") || methodName.equals("sortReverseAlphabetically")){
+            Alphabetizer editor = new Alphabetizer(input);
+            Alphabetizer.callMethod(editor, methodName, input);
+            return editor.getText();
+        }
+        /* 
+        else if (methodName.equals("addBullets") || methodName.equals("removeBullets")){
+            BulletsEditor editor = new BulletsEditor(input);
+            BulletsEditor.callMethod(editor, methodName, input);
+            return editor.getText();
+        } */
+        
+        
+        else {
             return "(Under Maintenance.)";
         }
     }

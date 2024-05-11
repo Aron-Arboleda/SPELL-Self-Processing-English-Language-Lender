@@ -1,5 +1,8 @@
 package com.spell.Logic;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class CaseConverter extends SPELLEditor {
     public CaseConverter(String textToEdit) {
         super(textToEdit);
@@ -70,5 +73,14 @@ public class CaseConverter extends SPELLEditor {
         sbEditor.delete(0, sbEditor.length());
         setText(text);
         return text;
+    }
+
+    public static void callMethod(CaseConverter instance, String methodName, String input) {
+        try {
+            Method method = CaseConverter.class.getMethod(methodName);
+            method.invoke(instance);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
