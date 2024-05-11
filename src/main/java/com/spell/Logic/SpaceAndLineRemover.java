@@ -10,6 +10,7 @@ public class SpaceAndLineRemover extends SPELLEditor {
 
     public String removeLineBreaks() {
         super.setText(super.excessSpaceRemover());
+        super.setText(super.getText().replaceAll("\r\n", ""));
         super.setText(super.getText().replaceAll("\n", " "));
         return super.getText();
     }
