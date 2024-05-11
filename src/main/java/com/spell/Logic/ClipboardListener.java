@@ -15,6 +15,7 @@ import javax.swing.JToggleButton;
 public class ClipboardListener extends Thread {
     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
     String methodName;
+    String bulletDesign;
     String prevClipboardContent = null;
     String output = null;
     JToggleButton toggleButton;
@@ -23,6 +24,12 @@ public class ClipboardListener extends Thread {
     public ClipboardListener(String methodName, JToggleButton toggleButton) {
         this.methodName = methodName;
         this.toggleButton = toggleButton;
+    }
+
+    public ClipboardListener(String methodName, JToggleButton toggleButton, String bulletDesign) {
+        this.methodName = methodName;
+        this.toggleButton = toggleButton;
+        this.bulletDesign = bulletDesign;
     }
 
     public static void copyFromTextArea(JTextArea textArea) {
@@ -78,16 +85,11 @@ public class ClipboardListener extends Thread {
             Alphabetizer editor = new Alphabetizer(input);
             Alphabetizer.callMethod(editor, methodName, input);
             return editor.getText();
-        }
-        /* 
-        else if (methodName.equals("addBullets") || methodName.equals("removeBullets")){
-            BulletsEditor editor = new BulletsEditor(input);
+        } else if (methodName.equals("addBullets") || methodName.equals("removeBullets")){
+            BulletsEditor editor = new BulletsEditor(input, bulletDesign);
             BulletsEditor.callMethod(editor, methodName, input);
             return editor.getText();
-        } */
-        
-        
-        else {
+        } else {
             return "(Under Maintenance.)";
         }
     }

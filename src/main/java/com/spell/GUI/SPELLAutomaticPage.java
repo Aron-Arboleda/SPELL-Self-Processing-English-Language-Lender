@@ -83,13 +83,13 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         bulletAdderPanel = new SPELLAutoIconsPanel("Add Bullets", 150, 150, "bulletAdderIcon.png");
         bulletAdderPanel.setBounds(60, 430, 150, 150);
         bulletAdderPanel.iconToggleButton.addActionListener(this);
-        
+
         String[] bulletCBOptions = { "a.)", "1.", "•", "-", "▪", "▫", "◦", "◆", "◇", "◈", "✓" };
         bulletDesignToAddCB = new JComboBox<String>(bulletCBOptions);
         bulletDesignToAddCB.setPreferredSize(new Dimension(50, 25));
         bulletDesignToAddCB.setFocusable(false);
         bulletDesignToAddCB.setBackground(Color.white);
-        
+
         bulletAdderPanel.taskBar.remove(bulletAdderPanel.iconToggleButton);
         bulletAdderPanel.taskBar.add(bulletDesignToAddCB);
         bulletAdderPanel.taskBar.add(bulletAdderPanel.iconToggleButton);
@@ -105,7 +105,6 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         bulletRemoverPanel.taskBar.remove(bulletRemoverPanel.iconToggleButton);
         bulletRemoverPanel.taskBar.add(bulletDesignToRemoveCB);
         bulletRemoverPanel.taskBar.add(bulletRemoverPanel.iconToggleButton);
-        
 
         grammarAndSpellingArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 Color.WHITE, Color.BLACK);
@@ -119,7 +118,8 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
                         if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
                             grammarAndSpellingArea
                                     .setComponentPopupMenu(
-                                            SPELLTextArea.createCustomContextMenu(grammarAndSpellingArea, newMatch, "automatic"));
+                                            SPELLTextArea.createCustomContextMenu(grammarAndSpellingArea, newMatch,
+                                                    "automatic"));
                             grammarAndSpellingArea.select(newMatch.getFromPos(), newMatch.getToPos());
                             grammarAndSpellingArea.getComponentPopupMenu().show(grammarAndSpellingArea, e.getX(),
                                     e.getY());
@@ -180,7 +180,8 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             grammarAndSpellingArea.setEditable(true);
         } else if (e.getSource() == grammarCheckButton) {
             grammarAndSpellingArea.setEditable(false);
-            SPELLManualPage.refreshLanguageToolChecker(grammarAndSpellingArea.getText(), grammarAndSpellingArea, "automatic");
+            SPELLManualPage.refreshLanguageToolChecker(grammarAndSpellingArea.getText(), grammarAndSpellingArea,
+                    "automatic");
         } else if (e.getSource() instanceof JToggleButton) {
             ClipboardListener clip = null;
             if (e.getSource() == upperCasePanel.iconToggleButton) {
@@ -201,18 +202,13 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
                 clip = new ClipboardListener("sortAlphabetically", alphabetizerPanel.iconToggleButton);
             } else if (e.getSource() == reverseAlphabetizerPanel.iconToggleButton) {
                 clip = new ClipboardListener("sortReverseAlphabetically", reverseAlphabetizerPanel.iconToggleButton);
-            } 
-            /*
-            else if (e.getSource() == bulletAdderPanel.iconToggleButton) {
-                clip = new ClipboardListener("bulletAdder", bulletAdderPanel.iconToggleButton);
+            } else if (e.getSource() == bulletAdderPanel.iconToggleButton) {
+                clip = new ClipboardListener("addBullets", bulletAdderPanel.iconToggleButton, bulletDesignToAddCB.getSelectedItem().toString());
             } else if (e.getSource() == bulletRemoverPanel.iconToggleButton) {
-                clip = new ClipboardListener("bulletRemover", bulletRemoverPanel.iconToggleButton);
-            } */
-            
-            
-            
-            else {
+                clip = new ClipboardListener("removeBullets", bulletRemoverPanel.iconToggleButton, bulletDesignToRemoveCB.getSelectedItem().toString());
+            } else {
                 System.out.println("Button Doesn't exist.");
+                return;
             }
             clip.start();
         }
