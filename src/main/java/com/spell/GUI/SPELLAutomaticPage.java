@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
@@ -207,7 +206,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             } else if (e.getSource() == bulletRemoverPanel.iconToggleButton) {
                 clip = new ClipboardListener("removeBullets", bulletRemoverPanel.iconToggleButton, bulletDesignToRemoveCB.getSelectedItem().toString());
             } else {
-                System.out.println("Button Doesn't exist.");
+                System.out.println("JToggleButton Doesn't exist.");
                 return;
             }
             clip.start();
