@@ -18,7 +18,6 @@ public class Alphabetizer extends PerLineEditor {
         Arrays.sort(parsedText);
         List<String> newList = Arrays.asList(parsedText);
         Collections.reverse(newList);
-        System.out.println(newList);
         parsedText = newList.toArray(new String[0]);
         super.setText(String.join("\n", parsedText));
 

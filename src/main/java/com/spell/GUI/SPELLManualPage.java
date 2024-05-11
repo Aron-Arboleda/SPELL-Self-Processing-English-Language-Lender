@@ -19,13 +19,11 @@ import javax.swing.border.EmptyBorder;
 import com.spell.Logic.*;
 import org.languagetool.rules.RuleMatch;
 
-import com.spell.Logic.ClipboardListener;
-
 public class SPELLManualPage extends SPELLPage implements ActionListener {
     // Manual Page Components
     static SPELLTextArea inputTextArea, outputTextArea;
     SPELLComboBox grammarComboBox, casingComboBox, spaceRemoverComboBox, alphabetizerComboBox;
-    SPELLComboBox bulletDesignComboBox;
+    SPELLComboBox bulletDesignToAddCB, bulletDesignToRemoveCB;
     FakeComboBox bulletEditorComboBox;
     ArrayList<SPELLComboBox> comboBoxes = new ArrayList<SPELLComboBox>();
     SPELLButton clearButton, copyButton;
@@ -51,14 +49,14 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         manualBackButton.setIcon(backButtonIcon);
         manualBackButton.addActionListener(this);
 
-        inputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
+        inputTextArea = new SPELLTextArea(new Font("Segoe UI Emoji", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 new Color(0x22252A), Color.WHITE);
 
         JScrollPane inputTextAreaPane = ScrollPaneFactory.newScrollPane(inputTextArea);
         inputTextAreaPane.setBounds(410, 105, 340, 460);
         inputTextAreaPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        outputTextArea = new SPELLTextArea(new Font("Segoe UI", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
+        outputTextArea = new SPELLTextArea(new Font("Segoe UI Emoji", Font.PLAIN, 15), new Insets(5, 5, 5, 5),
                 new Color(0x22252A), Color.WHITE);
         outputTextArea.setEditable(false);
         outputTextArea.addMouseListener(new MouseAdapter() {
@@ -120,10 +118,10 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         SPELLLabel bulletRemoverLabel = new SPELLLabel("Bullet Remover", 9, Color.WHITE);
         bulletRemoverLabel.setBounds(3, 3, 80, 10);
 
-        String[] bulletCBOptions = { "a.)", "1.)", "•", "-", "▪", "▫", "◦", "◆", "◇", "◈", "✓" };
-        bulletDesignComboBox = new SPELLComboBox(bulletCBOptions, "Bullet Editor", 12);
-        bulletDesignComboBox.setBounds(70, 10, 55, 25);
-        bulletDesignComboBox
+        String[] bulletCBOptions = { "a.)", "1.", "•", "-", "▪", "▫", "◦", "◆", "◇", "◈", "✓" };
+        bulletDesignToAddCB = new SPELLComboBox(bulletCBOptions, "Bullet Editor", 12);
+        bulletDesignToAddCB.setBounds(70, 10, 55, 25);
+        bulletDesignToAddCB
                 .setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
                         BorderFactory.createEmptyBorder(0, 10, 0, 0)));
 
@@ -132,18 +130,22 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         bulletAdderEditButton.addActionListener(this);
 
         bulletAdderPanel.add(bulletAdderLabel);
-        bulletAdderPanel.add(bulletDesignComboBox);
+        bulletAdderPanel.add(bulletDesignToAddCB);
         bulletAdderPanel.add(bulletAdderEditButton);
 
-        SPELLTextField bulletTextField = new SPELLTextField("Bullet to remove", 12);
-        bulletTextField.setBounds(70, 10, 55, 25);
+        bulletDesignToRemoveCB = new SPELLComboBox(bulletCBOptions, "Bullet Remover", 12);
+        bulletDesignToRemoveCB.setBounds(70, 10, 55, 25);
+        bulletDesignToRemoveCB
+                .setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.WHITE, 1),
+                        BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+
         bulletRemoveEditButton = new SPELLButton("Remove", 12, new Color(0x1B1E23), Color.white,
                 "Remove Bullets");
         bulletRemoveEditButton.addActionListener(this);
         bulletRemoveEditButton.setBounds(135, 10, 60, 25);
 
         bulletRemoverPanel.add(bulletRemoverLabel);
-        bulletRemoverPanel.add(bulletTextField);
+        bulletRemoverPanel.add(bulletDesignToRemoveCB);
         bulletRemoverPanel.add(bulletRemoveEditButton);
 
         dropdownPanel.add(bulletAdderPanel);
@@ -221,10 +223,9 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                 }
             }
         } else if (e.getSource() == bulletAdderEditButton) {
-            BulletsEditor edit = new BulletsEditor(inputText, bulletDesignComboBox.getSelectedItem().toString());
-            System.out.println(edit.getText());
+            BulletsEditor edit = new BulletsEditor(inputText, bulletDesignToAddCB.getSelectedItem().toString());
             outputTextArea.setText(edit.addBullets());
-        }
+        } 
     }
 
     public static void refreshLanguageToolChecker(String inputText, JTextArea outputTextArea, String page) {
