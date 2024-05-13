@@ -12,9 +12,11 @@ public class BulletsEditor extends PerLineEditor {
 
     public String addBullets() {
         String text = super.excessSpaceRemover();
-        text = text.replaceAll("\n", "\n" + "## ");
+        text = text.replaceAll("\n", "\n" + bulletDesign + " ");
 
         if (bulletDesign.equals("a.)")) {
+            text = text.replaceAll("a\\.\\)", "##");
+
             int i = 98;
             int y = 0;
             char letter, letter2;
@@ -41,10 +43,17 @@ public class BulletsEditor extends PerLineEditor {
                     }
 
                     if (y == 91) {
-                        i = 97;
                         y = 0;
                     }
                 }
+            }
+        } else if (bulletDesign.equals("1.")) {
+            text = text.replaceAll("1\\.", "##");
+            int i = 2;
+
+            while (text.contains("##")) {
+                text = text.replaceFirst("##", i + ".");
+                i++;
             }
         }
 
@@ -56,11 +65,25 @@ public class BulletsEditor extends PerLineEditor {
     }
 
     public String removeBullets() {
-        super.setText(super.excessSpaceRemover());
-        if (!(super.getText().contains(bulletDesign + " "))){
+        String text = super.excessSpaceRemover();
+        /* if (!(text.contains(bulletDesign + " "))){
+            super.setText(text);
             return super.getText();
+        } */
+
+        if (bulletDesign.equals("a.)")){
+            text = text.replaceAll("a\\.\\) ", "");
+            text = text.replaceAll("\n" + ".*" + "\\.\\) ", "\n");
         }
-        super.setText(super.getText().replaceAll(bulletDesign + " ", ""));
+        else if (bulletDesign.equals("1.")) {
+            for (int i = 1; i < text.split("\\n").length + 1; i++){
+                text = text.replaceAll(i + ". ", "");
+            }
+        } else {
+            text = text.replaceAll(bulletDesign, "");
+        }
+
+        super.setText(text);
         return super.getText();
     }
 
