@@ -21,10 +21,8 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String camelCasing() {
-        String text = super.excessSpaceRemover();
+        String text = super.excessSpaceRemover().toLowerCase();
         sbEditor.append(text);
-
-        sbEditor.setCharAt(0, Character.toLowerCase(sbEditor.charAt(0)));
 
         int total = sbEditor.length();
         for(int i = 0; i < total; i++){
@@ -42,7 +40,7 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String sentenceCase() {
-        String text = super.excessSpaceRemover();
+        String text = super.excessSpaceRemover().toLowerCase();
         sbEditor.append(text);
 
         sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));
@@ -59,7 +57,7 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String capitalizedCase() {
-        String text = super.excessSpaceRemover();
+        String text = super.excessSpaceRemover().toLowerCase();
         sbEditor.append(text);
 
         sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));
