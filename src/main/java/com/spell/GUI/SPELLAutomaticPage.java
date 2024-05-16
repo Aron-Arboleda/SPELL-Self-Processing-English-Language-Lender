@@ -12,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
@@ -27,7 +29,7 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             sentenceCasePanel, capitalizedCasePanel, removeLineBreaksPanel, removeSpacesPanel, bulletAdderPanel,
             bulletRemoverPanel;
 
-    SPELLButton automaticBackButton, grammarCheckButton, copyButton, resetButton;
+    SPELLButton automaticBackButton, grammarCheckButton, copyButton, resetButton, instructionButton;
     JComboBox<String> bulletDesignToAddCB, bulletDesignToRemoveCB;
 
     SPELLTextArea grammarAndSpellingArea;
@@ -144,6 +146,33 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         copyButton.setBounds(675, 495, 50, 30);
         copyButton.addActionListener(this);
 
+        JPanel instructionPanel = new JPanel();
+        instructionPanel.setBackground(new Color(0xF7DBA7));
+        instructionPanel.setBounds(60, 500, 560, 100);
+        instructionPanel.setVisible(false);
+
+        instructionButton = new SPELLButton("i", 15, Color.WHITE, Color.BLACK, "Instructions");
+        instructionButton.setFont(new Font("Georgia", Font.PLAIN, 15));
+        instructionButton.setBounds(60, 600, 30, 30);
+        // instructionButton.addActionListener(this);
+        instructionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                instructionPanel.setVisible(true);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                instructionPanel.setVisible(false);
+            }
+        });
+
+        String instructionsString = "<html>Users can only choose one automatic editing feature to toggle on. When the panel is on,<br> all the future text that will be copied will be edited based on the activated editing feature.<br> The output will be added to the clipboard so when you paste after copying the text, the<br> edited text will be pasted.</html>";
+        SPELLLabel exampleLabel = new SPELLLabel(instructionsString, 5, Color.WHITE);
+        exampleLabel.convertToParag();
+        exampleLabel.setForeground(Color.BLACK);
+        instructionPanel.add(exampleLabel);
+
         this.add(automaticBackButton);
 
         this.add(alphabetizerPanel);
@@ -166,6 +195,8 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
         this.add(resetButton);
         this.add(copyButton);
 
+        this.add(instructionButton);
+        this.add(instructionPanel, JLayeredPane.POPUP_LAYER);
     }
 
     @Override
@@ -202,9 +233,11 @@ public class SPELLAutomaticPage extends SPELLPage implements ActionListener {
             } else if (e.getSource() == reverseAlphabetizerPanel.iconToggleButton) {
                 clip = new ClipboardListener("sortReverseAlphabetically", reverseAlphabetizerPanel.iconToggleButton);
             } else if (e.getSource() == bulletAdderPanel.iconToggleButton) {
-                clip = new ClipboardListener("addBullets", bulletAdderPanel.iconToggleButton, bulletDesignToAddCB.getSelectedItem().toString());
+                clip = new ClipboardListener("addBullets", bulletAdderPanel.iconToggleButton,
+                        bulletDesignToAddCB.getSelectedItem().toString());
             } else if (e.getSource() == bulletRemoverPanel.iconToggleButton) {
-                clip = new ClipboardListener("removeBullets", bulletRemoverPanel.iconToggleButton, bulletDesignToRemoveCB.getSelectedItem().toString());
+                clip = new ClipboardListener("removeBullets", bulletRemoverPanel.iconToggleButton,
+                        bulletDesignToRemoveCB.getSelectedItem().toString());
             } else {
                 System.out.println("JToggleButton Doesn't exist.");
                 return;

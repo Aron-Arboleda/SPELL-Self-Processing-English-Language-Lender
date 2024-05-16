@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -37,7 +38,7 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import org.languagetool.rules.RuleMatch;
 
-class SPELLPage extends JPanel {
+class SPELLPage extends JLayeredPane {
     String pageName;
     private Image backgroundImage;
 

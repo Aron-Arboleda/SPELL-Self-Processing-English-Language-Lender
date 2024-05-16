@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -26,10 +27,11 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
     SPELLComboBox bulletDesignToAddCB, bulletDesignToRemoveCB;
     FakeComboBox bulletEditorComboBox;
     ArrayList<SPELLComboBox> comboBoxes = new ArrayList<SPELLComboBox>();
-    SPELLButton clearButton, copyButton;
+    SPELLButton clearButton, copyButton, instructionButton;
     SPELLButton bulletAdderEditButton, bulletRemoveEditButton;
 
-    static Image manualEditorBackImage = (new ImageIcon(SPELLPage.class.getResource("/images/ManualEditorBackground.jpg")))
+    static Image manualEditorBackImage = (new ImageIcon(
+            SPELLPage.class.getResource("/images/ManualEditorBackground.jpg")))
             .getImage();
 
     SPELLButton manualButton, manualBackButton;
@@ -68,7 +70,8 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                         RuleMatch newMatch = checker.matches.get(i);
                         if (position >= newMatch.getFromPos() && position <= newMatch.getToPos()) {
                             outputTextArea
-                                    .setComponentPopupMenu(SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch, "manual"));
+                                    .setComponentPopupMenu(
+                                            SPELLTextArea.createCustomContextMenu(outputTextArea, newMatch, "manual"));
                             outputTextArea.select(newMatch.getFromPos(), newMatch.getToPos());
                             outputTextArea.getComponentPopupMenu().show(outputTextArea, e.getX(), e.getY());
                             break;
@@ -163,6 +166,33 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         copyButton.setBounds(800, 580, 70, 40);
         copyButton.addActionListener(this);
 
+        JPanel instructionPanel = new JPanel();
+        instructionPanel.setBackground(new Color(0xF7DBA7));
+        instructionPanel.setBounds(60, 480, 450, 100);
+        instructionPanel.setVisible(false);
+
+        instructionButton = new SPELLButton("i", 15, new Color(0x22252A), Color.white, "Instructions");
+        instructionButton.setFont(new Font("Georgia", Font.PLAIN, 15));
+        instructionButton.setBounds(60, 580, 30, 30);
+        //instructionButton.addActionListener(this);
+        instructionButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                instructionPanel.setVisible(true);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                instructionPanel.setVisible(false);
+            }
+        });
+
+        String instructionsString = "<html>Users can use the manual option of the program by inputting text <br>in the input text area and then selecting an edit from the dropdown<br> boxes they want to be executed. The new text will be displayed <br>in the output text area.</html>";
+        SPELLLabel exampleLabel = new SPELLLabel(instructionsString, 5, Color.WHITE);
+        exampleLabel.convertToParag();
+        exampleLabel.setForeground(Color.BLACK);
+        instructionPanel.add(exampleLabel);
+
         this.add(manualBackButton);
         this.add(inputTextAreaPane);
         this.add(outputTextAreaPane);
@@ -174,7 +204,8 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         this.add(dropdownPanel);
         this.add(clearButton);
         this.add(copyButton);
-
+        this.add(instructionButton);
+        this.add(instructionPanel, JLayeredPane.POPUP_LAYER);
     }
 
     @Override
@@ -217,7 +248,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
                 if (alphabetizerComboBox.getSelectedIndex() == 0) {
                     edit.sortAlphabetically();
                     outputTextArea.setText(edit.getText());
-                } else if (alphabetizerComboBox.getSelectedIndex() == 1){
+                } else if (alphabetizerComboBox.getSelectedIndex() == 1) {
                     edit.sortReverseAlphabetically();
                     outputTextArea.setText(edit.getText());
                 }
@@ -228,24 +259,26 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         } else if (e.getSource() == bulletRemoveEditButton) {
             BulletsEditor edit = new BulletsEditor(inputText, bulletDesignToRemoveCB.getSelectedItem().toString());
             outputTextArea.setText(edit.removeBullets());
-            
-        } 
+
+        }
     }
 
     public static void refreshLanguageToolChecker(String inputText, JTextArea outputTextArea, String page) {
         if (page.equals("manual")) {
             SPELLManualPage.checker = new GrammarAndSpellingFixer(inputText);
             SPELLManualPage.checker.buildGrammarAndSpellingChecker();
-            SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea, SPELLManualPage.checker);
+            SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea,
+                    SPELLManualPage.checker);
             outputTextArea.setText(inputText);
             highlightErrors.showHighlights();
         } else if (page.equals("automatic")) {
             SPELLAutomaticPage.checker = new GrammarAndSpellingFixer(inputText);
             SPELLAutomaticPage.checker.buildGrammarAndSpellingChecker();
-            SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea, SPELLAutomaticPage.checker);
+            SPELLHighlightIndicators highlightErrors = new SPELLHighlightIndicators(inputText, outputTextArea,
+                    SPELLAutomaticPage.checker);
             outputTextArea.setText(inputText);
             highlightErrors.showHighlights();
         }
-        
+
     }
 }
