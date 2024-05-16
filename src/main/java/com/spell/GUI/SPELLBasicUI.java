@@ -131,6 +131,16 @@ class SPELLLabel extends JLabel {
         this.setText(text);
         this.setFont(new Font("Segoe UI", Font.PLAIN, fontSize));
         this.setForeground(foreColor);
+        
+    }
+
+    public void convertToHeading3() {
+        this.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        this.setForeground(Color.black);
+    }
+    public void convertToParag() {
+        this.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        this.setForeground(Color.black);
     }
 }
 

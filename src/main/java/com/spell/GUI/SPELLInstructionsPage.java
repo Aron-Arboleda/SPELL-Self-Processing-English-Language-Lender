@@ -3,6 +3,7 @@ package com.spell.GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,9 +13,8 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
 
     SPELLButton instructionsBackButton;
 
-    JPanel manualPanel = new JPanel();
-    JLabel[] manualLBLFeatures = new JLabel[30];
-    JScrollPane manualSP;
+    JPanel featuresPanel = new JPanel();
+    JScrollPane featuresSP;
 
     public SPELLInstructionsPage(String name, Color background) {
         super(name, background);
@@ -28,23 +28,67 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
         instructionsBackButton.setIcon(backButtonIcon);
         instructionsBackButton.addActionListener(this);
 
-        manualPanel.setBounds(67, 124, 580, 250);
-        manualPanel.setLayout(new BoxLayout(manualPanel, BoxLayout.Y_AXIS));
-        manualPanel.setOpaque(false);
-        manualPanel.setBackground(new Color(0, 0 , 0, 0));
+        featuresPanel.setLayout(new BoxLayout(featuresPanel, BoxLayout.Y_AXIS));
+        featuresPanel.setOpaque(false);
+        // featuresPanel.setBackground(new Color(0,0,0,0));
+        featuresPanel.setForeground(Color.BLACK);
 
-        // manualSP.setBounds(67, 124, 605, 250);
-        // manualSP.setBorder(new EmptyBorder(0, 0, 0, 0));
+        String[] headingsArray = { "Check Grammar and Spelling", "UPPERCASE", "lowercase", "Sentence case",
+                "camelCasing", "Capitalized Case", "Remove Line Breaks", "Remove Spaces", "Sort Alphabetically",
+                "Sort Reverse Alphabetically", "Add Bullets", "Remove Bullets" };
+        String[] descriptionsArray = {
+                "corrects the grammar and spelling errors of text",
+                "capitalizes all characters",
+                "all characters are changed into lowercase",
+                "capitalizes the first character of every sentence",
+                "<html>turns the first character into lowercase and then <br>every succeeding first letter of the words are in uppercase</html>",
+                "capitalizes the first character of every word",
+                "removes all the new lines or line breaks",
+                "removes all spaces",
+                "items are sorted alphabetically based on their first character",
+                "items are sorted alphabetically from z to a based on their first character",
+                "adds a specified bullet design that has a sequence if applicable (e.g. 1., 2., 3. …)",
+                "removes the chosen bullet design"
+        };
+        String[] examplesArray = {
+                "Example: Input: He are driving. | Output: He is driving.",
+                "Example: Input: hello | Output: HELLO",
+                "Example: Input: GOOD MORNING! | Output: good morning!",
+                "<html>Example:<br>Input: good day, sir. did I pass my exam? | Output: Good day, sir. Did I pass my exam?</html>",
+                "Example: Input: Str name | Output: strName",
+                "<html>Example:<br>Input: the quick brown fox jumps over the lazy dog<br>Output: The Quick Brown Fox Jumps Over The Lazy Dog.</html>",
+                "<html>Example:<br>Input:<br>Save<br>The<br>Date<br>Output: Save the date</html>",
+                "Input: Sam sung | Output: Samsung",
+                "<html>Example:<br>Input:<br>Alex<br>Axel<br>Aron<br>Juan<br>Output:<br> Alex<br>Aron<br>Axel<br>Juan</html>",
+                "<html>Example:<br>Input:<br>Alex<br>Axel<br>Aron<br>Juan<br>Output:<br> Juan<br>Axel<br>Aron<br>Alex</html>",
+                "<html>Example:<br>Input:<br>Alex<br>Aron<br>Axel<br>Juan<br>Output:<br>- Alex <br>- Aron<br>- Axel<br>- Juan</html>",
+                "<html>Example:<br>Input:<br>- Alex <br>- Aron<br>- Axel<br>- Juan<br>Output:<br> Alex<br>Aron<br>Axel<br>Juan</html>"
+        };
+        SPELLLabel featuresLabel = new SPELLLabel("Features:", 5, Color.WHITE);
+        featuresLabel.setFont(new Font("Segoe UI", Font.BOLD, 27));
+        featuresLabel.setForeground(Color.BLACK);
+        featuresPanel.add(featuresLabel);
 
-        for(int i = 0; i < manualLBLFeatures.length; i++){
-            manualLBLFeatures[i] = new JLabel(Integer.toString(i));
-            manualPanel.add(manualLBLFeatures[i]);
+        for (int i = 0; i < headingsArray.length; i++) {
+            SPELLLabel headingLabel = new SPELLLabel(headingsArray[i], 5, Color.WHITE);
+            headingLabel.convertToHeading3();
+            featuresPanel.add(headingLabel);
+
+            SPELLLabel descriptionLabel = new SPELLLabel(descriptionsArray[i], 5, Color.WHITE);
+            descriptionLabel.convertToParag();
+            featuresPanel.add(descriptionLabel);
+
+            SPELLLabel exampleLabel = new SPELLLabel(examplesArray[i], 5, Color.WHITE);
+            exampleLabel.convertToParag();
+            featuresPanel.add(exampleLabel);
+            featuresPanel.add(Box.createVerticalStrut(10));
         }
 
-        manualSP = ScrollPaneFactory.newScrollPane(manualPanel);
+        featuresSP = ScrollPaneFactory.newScrollPane(featuresPanel);
+        featuresSP.setBorder(new EmptyBorder(0, 0, 0, 0));
+        featuresSP.setBounds(67, 124, 580, 500);
 
-        this.add(manualSP);
-        this.add(manualPanel);
+        this.add(featuresSP);
         this.add(instructionsBackButton);
     }
 

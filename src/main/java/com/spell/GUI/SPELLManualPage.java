@@ -228,6 +228,7 @@ public class SPELLManualPage extends SPELLPage implements ActionListener {
         } else if (e.getSource() == bulletRemoveEditButton) {
             BulletsEditor edit = new BulletsEditor(inputText, bulletDesignToRemoveCB.getSelectedItem().toString());
             outputTextArea.setText(edit.removeBullets());
+            
         } 
     }
 

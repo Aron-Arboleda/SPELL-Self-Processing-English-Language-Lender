@@ -55,6 +55,7 @@ public class SPELLEditor implements TextEdit {
 
         text = sbEditor.toString();
         sbEditor.delete(0, sbEditor.length());
+        setText(text);
         return text;
     }
 }

@@ -73,16 +73,21 @@ public class BulletsEditor extends PerLineEditor {
 
         if (bulletDesign.equals("a.)")){
             text = text.replaceAll("a\\.\\) ", "");
+            text = text.replaceAll("a\\.\\)", "");
             text = text.replaceAll("\n" + ".*" + "\\.\\) ", "\n");
+            text = text.replaceAll("\n" + ".*" + "\\.\\)", "\n");
         }
         else if (bulletDesign.equals("1.")) {
             for (int i = 1; i < text.split("\\n").length + 1; i++){
                 text = text.replaceAll(i + ". ", "");
+                text = text.replaceAll(i + ".", "");
             }
         } else {
+            text = text.replaceAll(bulletDesign + " ", ""); // "• "
             text = text.replaceAll(bulletDesign, "");
         }
 
+        
         super.setText(text);
         return super.getText();
     }
