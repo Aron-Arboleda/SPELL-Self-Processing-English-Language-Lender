@@ -14,6 +14,7 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
     SPELLButton instructionsBackButton;
 
     JPanel featuresPanel = new JPanel();
+    JPanel definitionPanel = new JPanel();
     JScrollPane featuresSP;
 
     public SPELLInstructionsPage(String name, Color background) {
@@ -88,6 +89,23 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
         featuresSP.setBorder(new EmptyBorder(0, 0, 0, 0));
         featuresSP.setBounds(67, 124, 580, 500);
 
+        definitionPanel.setLayout(new BoxLayout(definitionPanel, BoxLayout.Y_AXIS));
+        definitionPanel.setOpaque(false);
+        definitionPanel.setForeground(Color.BLACK);
+        definitionPanel.setBounds(750, 40, 650, 300);
+
+        SPELLLabel whatIsSpell = new SPELLLabel("What Is S.P.E.L.L.?", 5, Color.WHITE);
+        whatIsSpell.setFont(new Font("Segoe UI", Font.BOLD, 45));
+        whatIsSpell.setForeground(Color.BLACK);
+        definitionPanel.add(whatIsSpell);
+
+        String strSpellDefintion = "<html> S.P.E.L.L. helps you with your grammar and<br>spelling. Furthermore, it allows you to change<br>the casing of certain or all characters in your<br>text. It also enables users to add various<br>bullets and remove spaces, line breaks, and<br>bullets. All these features can be done by the<br>program showing the edited inputted text or<br>editing the clipboard text directly.\n<hmtl>";
+        SPELLLabel spellDefinition = new SPELLLabel(strSpellDefintion, 5, Color.WHITE);
+        spellDefinition.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        spellDefinition.setForeground(Color.BLACK);
+        definitionPanel.add(spellDefinition);
+
+        this.add(definitionPanel);
         this.add(featuresSP);
         this.add(instructionsBackButton);
     }
