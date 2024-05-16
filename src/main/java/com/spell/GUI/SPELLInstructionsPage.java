@@ -1,16 +1,20 @@
 package com.spell.GUI;
 
-import java.awt.Color;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
     static Image instructionsBackImage = SPELLPage.newScaledImage("InstructionsBackground.jpg", 1210, 680).getImage();
 
     SPELLButton instructionsBackButton;
+
+    JPanel manualPanel = new JPanel();
+    JLabel[] manualLBLFeatures = new JLabel[10];
+    JScrollPane manualSP = ScrollPaneFactory.newScrollPane(manualPanel);
 
     public SPELLInstructionsPage(String name, Color background) {
         super(name, background);
@@ -24,6 +28,19 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
         instructionsBackButton.setIcon(backButtonIcon);
         instructionsBackButton.addActionListener(this);
 
+        // manualPanel.setLayout(new BoxLayout(manualPanel, BoxLayout.Y_AXIS));
+        manualPanel.setBounds(67, 124, 605, 250);
+        manualPanel.setBackground(Color.LIGHT_GRAY);
+
+        for(int i = 0; i < manualLBLFeatures.length; i++){
+            manualLBLFeatures[i] = new JLabel(Integer.toString(i));
+            manualPanel.add(manualLBLFeatures[i]);
+        }
+
+        manualSP.setBounds(67, 124, 605, 250);
+        manualSP.setBorder(new EmptyBorder(0, 0, 0, 0));
+
+        this.add(manualPanel);
         this.add(instructionsBackButton);
 
     }
