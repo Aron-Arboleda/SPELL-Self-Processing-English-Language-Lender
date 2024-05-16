@@ -13,7 +13,7 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
     SPELLButton instructionsBackButton;
 
     JPanel manualPanel = new JPanel();
-    JLabel[] manualLBLFeatures = new JLabel[10];
+    JLabel[] manualLBLFeatures = new JLabel[30];
     JScrollPane manualSP;
 
     public SPELLInstructionsPage(String name, Color background) {
@@ -28,10 +28,10 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
         instructionsBackButton.setIcon(backButtonIcon);
         instructionsBackButton.addActionListener(this);
 
-        manualPanel.setBounds(67, 124, 605, 250);
+        manualPanel.setBounds(67, 124, 580, 250);
         manualPanel.setLayout(new BoxLayout(manualPanel, BoxLayout.Y_AXIS));
-
-        // manualPanel.setBackground(new Color(0, 0 , 0, 0));
+        manualPanel.setOpaque(false);
+        manualPanel.setBackground(new Color(0, 0 , 0, 0));
 
         // manualSP.setBounds(67, 124, 605, 250);
         // manualSP.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -43,9 +43,9 @@ public class SPELLInstructionsPage extends SPELLPage implements ActionListener {
 
         manualSP = ScrollPaneFactory.newScrollPane(manualPanel);
 
+        this.add(manualSP);
         this.add(manualPanel);
         this.add(instructionsBackButton);
-
     }
 
     @Override
