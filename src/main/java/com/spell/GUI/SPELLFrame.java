@@ -17,10 +17,11 @@ import org.languagetool.language.AmericanEnglish;
 import org.languagetool.rules.RuleMatch;
 
 public class SPELLFrame extends JFrame implements ActionListener {
-    public static Language language = new AmericanEnglish();
-    public static JLanguageTool langTool = new JLanguageTool(language);
+    public static Language language;
+    public static JLanguageTool langTool;
     public List<RuleMatch> matches;
 
+    static SPELLLoadingPage loadingPage;
     static SPELLPage homePage, manualPage, automaticPage, iPage;
     ArrayList<SPELLPage> pagesList = new ArrayList<SPELLPage>();
     static SPELLPage ACTIVEPAGE;
@@ -79,6 +80,8 @@ public class SPELLFrame extends JFrame implements ActionListener {
         pagesList.add(homePage);
 
         // #endregion
+        loadingPage = new SPELLLoadingPage("loadingPage", Color.WHITE);
+        pagesList.add(loadingPage);
 
         manualPage = new SPELLManualPage("manualPage", Color.WHITE);
         pagesList.add(manualPage);
@@ -94,17 +97,23 @@ public class SPELLFrame extends JFrame implements ActionListener {
             this.add(spellPage);
         }
 
-        homePage.setVisible(true);
-        ACTIVEPAGE = homePage;
+        loadingPage.setVisible(true);
+        ACTIVEPAGE = loadingPage;
 
         this.setLayout(null);
         this.setVisible(true);
 
         try {
-            //Set<CategoryId> categorySet = new LinkedHashSet<>();
-            //categorySet.add(new CategoryId("CASING"));
-            //langTool.disableRule("CASING");
+            language = new AmericanEnglish();
+            loadingPage.progressBar.setValue(40);
+            loadingPage.loadingLabel.setText("Loading... 40%");
+            langTool = new JLanguageTool(language);
+            loadingPage.progressBar.setValue(80);
+            loadingPage.loadingLabel.setText("Loading... 80%");
             matches = langTool.check("He are driving. The bird is also ftyling.");
+            loadingPage.progressBar.setValue(100);
+            loadingPage.loadingLabel.setText("Loading... 100%");
+            switchPage(homePage);
         } catch (Exception e) {
             e.printStackTrace();
         }
