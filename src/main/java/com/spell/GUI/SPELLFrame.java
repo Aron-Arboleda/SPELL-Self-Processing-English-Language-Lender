@@ -6,11 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import org.languagetool.JLanguageTool;
+import org.languagetool.Language;
+import org.languagetool.language.AmericanEnglish;
+import org.languagetool.rules.RuleMatch;
+
 public class SPELLFrame extends JFrame implements ActionListener {
+    public static Language language = new AmericanEnglish();
+    public static JLanguageTool langTool = new JLanguageTool(language);
+    public List<RuleMatch> matches;
+
     static SPELLPage homePage, manualPage, automaticPage, iPage;
     ArrayList<SPELLPage> pagesList = new ArrayList<SPELLPage>();
     static SPELLPage ACTIVEPAGE;
@@ -89,6 +99,15 @@ public class SPELLFrame extends JFrame implements ActionListener {
 
         this.setLayout(null);
         this.setVisible(true);
+
+        try {
+            //Set<CategoryId> categorySet = new LinkedHashSet<>();
+            //categorySet.add(new CategoryId("CASING"));
+            //langTool.disableRule("CASING");
+            matches = langTool.check("He are driving. The bird is also ftyling.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
