@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -115,7 +116,7 @@ public class SPELLFrame extends JFrame implements ActionListener {
             loadingPage.loadingLabel.setText("Loading... 100%");
             switchPage(homePage);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Dito nageerror: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
