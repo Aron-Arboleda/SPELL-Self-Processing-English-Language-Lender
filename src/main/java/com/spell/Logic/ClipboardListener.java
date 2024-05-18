@@ -62,7 +62,7 @@ public class ClipboardListener extends Thread {
             prevClipboardContent = currentClipboardContent;
 
             output = processInput(currentClipboardContent);
-            System.out.println(output);
+            //System.out.println(output);
             copyOutputToClipboard(output);
         }
     }

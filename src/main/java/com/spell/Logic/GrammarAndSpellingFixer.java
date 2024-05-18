@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.swing.JTextArea;
 
-import org.languagetool.JLanguageTool;
-import org.languagetool.Language;
-import org.languagetool.language.AmericanEnglish;
 import org.languagetool.rules.RuleMatch;
 
 import com.spell.GUI.SPELLFrame;
@@ -38,7 +35,7 @@ public class GrammarAndSpellingFixer extends SPELLEditor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(super.sbEditor.toString());
+        //System.out.println(super.sbEditor.toString());
 
         super.setText(textToCheck);
         return textToCheck;

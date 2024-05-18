@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 public class SPELLLoadingPage extends SPELLPage {
