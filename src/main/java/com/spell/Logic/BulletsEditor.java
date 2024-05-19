@@ -66,10 +66,6 @@ public class BulletsEditor extends PerLineEditor {
 
     public String removeBullets() {
         String text = super.excessSpaceRemover();
-        /* if (!(text.contains(bulletDesign + " "))){
-            super.setText(text);
-            return super.getText();
-        } */
 
         if (bulletDesign.equals("a.)")){
             text = text.replaceAll("a\\.\\) ", "");

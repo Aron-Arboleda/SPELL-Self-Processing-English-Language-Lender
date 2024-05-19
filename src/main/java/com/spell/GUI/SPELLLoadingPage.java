@@ -18,7 +18,6 @@ public class SPELLLoadingPage extends SPELLPage {
         this.setImage(loadingBackImage);
 
         progressBar = new JProgressBar();
-        // progressBar.setBackground(Color.black);
         progressBar.setBounds(210, 520, 800, 30);
         progressBar.setVisible(true);
         progressBar.setMinimum(0);

@@ -1,40 +1,10 @@
 package com.spell.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicButtonUI;
-import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.*;
 
 import org.languagetool.rules.RuleMatch;
 
@@ -289,7 +259,6 @@ class SPELLTextField extends JTextField {
         this.setCaretColor(Color.WHITE);
     }
 }
-// #region[rgba(0, 0, 0, 0.15)] Automatic Page Specific UI
 
 class SPELLAutoIconsPanel extends JPanel {
     String iconName;
@@ -306,7 +275,6 @@ class SPELLAutoIconsPanel extends JPanel {
         this.setSize(width, height);
         
         ImageIcon panelBackgroundImage = SPELLPage.newScaledImage("AutomaticPageIcons/" + iconImageName, width, height);
-        //ImageIcon panelBackgroundImage = new ImageIcon(SPELLPage.class.getResource("/images/AutomaticPageIcons/" + iconImageName));
         this.backgroundImage = panelBackgroundImage.getImage();
 
         JPanel titleBar = new JPanel();
@@ -335,10 +303,9 @@ class SPELLAutoIconsPanel extends JPanel {
                 ButtonModel model = button.getModel();
 
                 if (model.isSelected()) {
-                    button.setBackground(new Color(0xB2D2B6)); // Change background color to green when toggled
+                    button.setBackground(new Color(0xB2D2B6));
                 } else {
-                    button.setBackground(UIManager.getColor("Button.background")); // Use default background color when
-                                                                                   // untoggled
+                    button.setBackground(UIManager.getColor("Button.background")); 
                 }
 
                 super.paint(g, c);
@@ -381,4 +348,3 @@ class SPELLAutoIconsPanel extends JPanel {
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
-// #endregion

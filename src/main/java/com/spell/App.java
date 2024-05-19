@@ -1,7 +1,5 @@
 package com.spell;
-
 import javax.swing.JFrame;
-
 import com.spell.GUI.SPELLFrame;
 
 public class App extends JFrame {

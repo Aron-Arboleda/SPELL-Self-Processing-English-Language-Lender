@@ -17,7 +17,6 @@ public class SpaceAndLineRemover extends SPELLEditor {
 
     public String removeSpaces() {
         String text = super.getText();
-        //super.setText(text.replaceAll("\n", ""));
         super.setText(text.replaceAll(" ", ""));
         return super.getText();
     }
