@@ -1,6 +1,6 @@
 # SPELL-Self-Processing-English-Language-Lender
 <div style="text-align: center;">
-    <img src='readme/SPELLLogo.png' width="49%" >
+  <img src="readme/SPELLLogo.png" width="50%" />
 </div>
 
 ## A Java Swing desktop app that can manually and automatically edit text, and also provides grammar checking and spelling correction.
