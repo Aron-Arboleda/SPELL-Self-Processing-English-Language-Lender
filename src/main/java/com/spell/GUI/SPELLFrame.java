@@ -50,8 +50,14 @@ public class SPELLFrame extends JFrame implements ActionListener {
 
         manualButton = new OpaqueButton("Go to Manual Page");
         manualButton.setBounds(233, 400, 250, 123);
-        
         manualButton.addActionListener(this);
+        manualButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                homePage.setImage(manualBackgroundImage);
+                homePage.repaint();
+            }
+        });
 
         automaticButton = new OpaqueButton("Go to Automatic Page");
         automaticButton.setBounds(655, 410, 325, 125);
