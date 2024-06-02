@@ -82,8 +82,12 @@ public class ClipboardListener extends Thread {
             return editor.getText();
         } else if (methodName.equals("addBullets") || methodName.equals("removeBullets")){
             BulletsEditor editor = new BulletsEditor(input, bulletDesign);
-            BulletsEditor.callMethod(editor, methodName, input);
-            return editor.getText();
+            if (input.contains("\n")) {
+                BulletsEditor.callMethod(editor, methodName, input);
+                return editor.getText();
+            } else {
+                return input;
+            }
         } else {
             return "(Under Maintenance.)";
         }
