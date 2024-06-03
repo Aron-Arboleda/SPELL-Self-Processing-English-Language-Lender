@@ -15,9 +15,7 @@
 
 ## Instructions
 ### To use the app
-* first ensure that you have Java installed in your pc, secondly make sure that the its path 
-is specified in the Environment Variables: Control Panel/System/Edit environment variables/System variables/Path/Edit/ then ensure that the JDK bin folder path (e.g. C:\Program Files\Java\jdk-21\bin) is present.
-* download the [SPELL.exe](https://github.com/Aron-Arboleda/SPELL-Self-Processing-English-Language-Lender/blob/main/dist/SPELL.exe) file under the dist folder, and run it.
+* download the [SPELL_Installer.exe](https://github.com/Aron-Arboleda/SPELL-Self-Processing-English-Language-Lender/blob/main/dist/SPELL_Installer.exe) file under the dist folder, and install the application.
 ## Features still in development
 * Bugs Fixing
 * Adding a database to apply history feature

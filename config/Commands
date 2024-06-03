@@ -1,0 +1,7 @@
+Deployment Commands:
+
+To make a custom bundled jre:
+>>> jlink --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument --output dist/jre
+
+To test the bundled jre
+>>> ./dist/jre/bin/java -jar spell-self-processing-self-language-lender.jar
