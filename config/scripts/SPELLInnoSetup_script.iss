@@ -2,18 +2,18 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SPELL"
-#define MyAppVersion "1.0.1.0"
+#define MyAppVersion "1.0.1.1"
 #define MyAppPublisher "Aron-Arboleda"
 #define MyAppURL "https://github.com/Aron-Arboleda/SPELL-Self-Processing-English-Language-Lender"
 #define MyAppExeName "SPELL.exe"
-#define MyAppAssocName MyAppName + "_SetupInstaller"
+#define MyAppAssocName MyAppName + "_Setup"
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{800A113C-E984-48F6-86C4-087C8F598F0D}
+AppId={{036336B3-9937-4865-929A-CB2DA4115F93}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -25,8 +25,9 @@ DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
 LicenseFile=D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\LICENSE.txt
-; Remove the following line to run in administrative install mode (install for all users.)
-PrivilegesRequired=admin
+; Uncomment the following line to run in non administrative install mode (install for current user only.)
+;PrivilegesRequired=lowest
+OutputDir=D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist
 OutputBaseFilename=SPELL_Installer
 SetupIconFile=D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist\setup\SPELLLogo.ico
 Compression=lzma

@@ -50,21 +50,25 @@ public class ClipboardListener extends Thread {
     public void detectClipboardChanges() {
         Transferable contents = sysClip.getContents(this);
         String currentClipboardContent = "";
-        try {
-            currentClipboardContent = (String) contents.getTransferData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (!(currentClipboardContent.equals(prevClipboardContent)) && !(currentClipboardContent.equals(output))){
-            prevClipboardContent = currentClipboardContent;
-
-            output = processInput(currentClipboardContent);
-            copyOutputToClipboard(output);
+        if (isClipboardContentString(contents)){
+            currentClipboardContent = getClipboardContentAsString(contents);
+            if (!(currentClipboardContent.equals(prevClipboardContent)) && !(currentClipboardContent.equals(output))) {
+                prevClipboardContent = currentClipboardContent;
+    
+                output = processInput(currentClipboardContent);
+                copyOutputToClipboard(output);
+            }
         }
     }
+
+    public static String getClipboardContentAsString(Transferable content) {
+        try {
+            return (String) content.getTransferData(DataFlavor.stringFlavor);
+        } catch (UnsupportedFlavorException | IOException e) {
+            return "";
+        }
+        
+    } 
 
     String processInput(String input) {
         if (methodName.equals("upperCase") || methodName.equals("lowerCase") || methodName.equals("sentenceCase")
@@ -97,5 +101,22 @@ public class ClipboardListener extends Thread {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         StringSelection selection = new StringSelection(output);
         clipboard.setContents(selection, null);
+    }
+
+    public static boolean isClipboardContentString(Transferable content) {
+        // Check if the content is available and has a string flavor
+        if (content != null && content.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+            try {
+                // Try to get the string from the clipboard
+                String text = (String) content.getTransferData(DataFlavor.stringFlavor);
+                if (text != null) {
+                    // The clipboard contains a string
+                    return true;
+                }
+            } catch (UnsupportedFlavorException | IOException e) {
+                return false;
+            }
+        }
+        return false;
     }
 }

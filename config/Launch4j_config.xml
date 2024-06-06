@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist\SPELLLogo.ico</icon>
+  <icon>D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist\setup\SPELLLogo.ico</icon>
   <singleInstance>
     <mutexName>SPELL_Mutex_4D1E2A6B</mutexName>
     <windowTitle>SPELL</windowTitle>
@@ -26,12 +26,12 @@
     <maxVersion></maxVersion>
   </jre>
   <versionInfo>
-    <fileVersion>1.0.1.0</fileVersion>
-    <txtFileVersion>1.0.1.0</txtFileVersion>
+    <fileVersion>1.0.1.1</fileVersion>
+    <txtFileVersion>1.0.1.1</txtFileVersion>
     <fileDescription>SPELL Executable File</fileDescription>
     <copyright>Copyright (c) 2024 SPELL. All rights reserved. Redistribution and use are permitted with conditions. No warranties; no liability.</copyright>
-    <productVersion>1.0.1.0</productVersion>
-    <txtProductVersion>1.0.1.0</txtProductVersion>
+    <productVersion>1.0.1.1</productVersion>
+    <txtProductVersion>1.0.1.1</txtProductVersion>
     <productName>SPELL (Self-Processing-English-Language-Lender): General Writing Tool</productName>
     <companyName>SPELL</companyName>
     <internalName>SPELL</internalName>
