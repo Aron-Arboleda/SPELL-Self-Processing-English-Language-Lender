@@ -9,24 +9,24 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String upperCase() {
-        String text = super.excessSpaceRemover().toUpperCase();
+        String text = excessSpaceRemover(sbEditor, super.getText()).toUpperCase();
         setText(text);
         return text;
     }
 
     public String lowerCase() {
-        String text = super.excessSpaceRemover().toLowerCase();
+        String text = excessSpaceRemover(sbEditor, super.getText()).toLowerCase();
         setText(text);
         return text;
     }
 
     public String camelCasing() {
-        String text = super.excessSpaceRemover().toLowerCase();
+        String text = excessSpaceRemover(sbEditor, super.getText()).toLowerCase();
         sbEditor.append(text);
 
         int total = sbEditor.length();
         for(int i = 0; i < total; i++){
-            if(Character.isWhitespace(sbEditor.charAt(i))){
+            if(sbEditor.charAt(i) == ' '){
                 sbEditor.deleteCharAt(i);
                 sbEditor.setCharAt(i, Character.toUpperCase(sbEditor.charAt(i)));
                 total--;
@@ -40,7 +40,7 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String sentenceCase() {
-        String text = super.excessSpaceRemover().toLowerCase();
+        String text = excessSpaceRemover(sbEditor, super.getText()).toLowerCase();
         sbEditor.append(text);
 
         sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));
@@ -57,7 +57,7 @@ public class CaseConverter extends SPELLEditor {
     }
 
     public String capitalizedCase() {
-        String text = super.excessSpaceRemover().toLowerCase();
+        String text = excessSpaceRemover(sbEditor, super.getText()).toLowerCase();
         sbEditor.append(text);
 
         sbEditor.setCharAt(0, Character.toUpperCase(sbEditor.charAt(0)));

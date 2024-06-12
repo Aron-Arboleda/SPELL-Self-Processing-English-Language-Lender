@@ -6,12 +6,12 @@ import java.lang.reflect.Method;
 public class BulletsEditor extends PerLineEditor {
     public String bulletDesign;
     public BulletsEditor(String textToEdit, String bulletDesign) {
-        super(textToEdit);
+        super(textToEdit);    
         this.bulletDesign = bulletDesign;
     }
 
     public String addBullets() {
-        String text = super.excessSpaceRemover();
+        String text = excessSpaceRemover(sbEditor, super.getText());
         text = text.replaceAll("\n", "\n" + bulletDesign + " ");
 
         if (bulletDesign.equals("a.)")) {
@@ -65,7 +65,7 @@ public class BulletsEditor extends PerLineEditor {
     }
 
     public String removeBullets() {
-        String text = super.excessSpaceRemover();
+        String text = excessSpaceRemover(sbEditor, super.getText());
 
         if (bulletDesign.equals("a.)")){
             text = text.replaceAll("a\\.\\) ", "");

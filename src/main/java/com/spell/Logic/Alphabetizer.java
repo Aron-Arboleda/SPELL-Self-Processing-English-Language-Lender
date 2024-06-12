@@ -12,6 +12,7 @@ public class Alphabetizer extends PerLineEditor {
     }
 
     public void sortAlphabetically() {
+        
         Arrays.sort(parsedText);
         super.setText(String.join("\n", parsedText));
     }
