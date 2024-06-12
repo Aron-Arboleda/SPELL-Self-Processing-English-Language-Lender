@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SPELL"
-#define MyAppVersion "1.0.1.1"
+#define MyAppVersion "1.0.1.2"
 #define MyAppPublisher "Aron-Arboleda"
 #define MyAppURL "https://github.com/Aron-Arboleda/SPELL-Self-Processing-English-Language-Lender"
 #define MyAppExeName "SPELL.exe"
