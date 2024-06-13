@@ -51,7 +51,6 @@ public class SPELLEditor implements TextEdit {
                     sbEditor.deleteCharAt(i);
                     total--;
                 }
-                
             }
         }
 
