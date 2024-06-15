@@ -40,7 +40,7 @@ public class SPELLFrame extends JFrame implements ActionListener {
         this.setSize(1225, 715);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        ImageIcon logo = new ImageIcon(SPELLFrame.class.getResource("/images/SPELLLogo.png"));
+        ImageIcon logo = new ImageIcon(SPELLFrame.class.getResource("/images/SPELLLogoSmaller.png"));
         this.setIconImage(logo.getImage());
         this.getContentPane().setBackground(Color.white);
 
@@ -116,7 +116,8 @@ public class SPELLFrame extends JFrame implements ActionListener {
             loadingPage.loadingLabel.setText("Loading... 100%");
             switchPage(homePage);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Dito nageerror: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Dito nageerror: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
     }
