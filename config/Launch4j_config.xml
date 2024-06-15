@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist\spell-self-processing-self-language-lender.jar</jar>
-  <outfile>D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist\SPELL.exe</outfile>
+  <jar>D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\target\spell-text-editor-1.0-SNAPSHOT.jar</jar>
+  <outfile>D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\target\SPELL.exe</outfile>
   <errTitle>SPELL Error</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
