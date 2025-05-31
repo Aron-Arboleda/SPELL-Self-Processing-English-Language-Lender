@@ -33,7 +33,7 @@ public class SPELLLoadingPage extends SPELLPage {
         loadingLabel = new SPELLLabel("Loading... 0%", 5, Color.WHITE);
         loadingLabel.convertToParag();
         loadingLabel.setForeground(Color.WHITE);
-        loadingLabel.setBounds(210, 545, 100, 40);
+        loadingLabel.setBounds(210, 545, 300, 40);
         this.add(loadingLabel);
     }
 

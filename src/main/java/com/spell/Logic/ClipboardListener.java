@@ -37,7 +37,7 @@ public class ClipboardListener extends Thread {
         while (toggleButton.isSelected()) {
             detectClipboardChanges();
             try {
-                this.sleep(500);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -4,7 +4,7 @@ To compile the maven project into a snapshot jar, do this command in the pom.xml
 >>> mvn clean package
 
 To make a custom bundled jre:
->>> jlink --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument --output dist/setup/jre
+>>> jlink --add-modules java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument --output target/jre
 
 To test the bundled jre
->>> ./dist/jre/bin/java -jar spell-self-processing-self-language-lender.jar
+>>> ./target/jre/bin/java -jar ./target/spell-text-editor-1.0-SNAPSHOT.jar

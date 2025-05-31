@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
-import org.languagetool.language.AmericanEnglish;
+import org.languagetool.Languages; // Added import
 import org.languagetool.rules.RuleMatch;
 
 public class SPELLFrame extends JFrame implements ActionListener {
@@ -105,19 +105,28 @@ public class SPELLFrame extends JFrame implements ActionListener {
         this.setVisible(true);
 
         try {
-            language = new AmericanEnglish();
+            loadingPage.progressBar.setValue(10);
+            loadingPage.loadingLabel.setText("Loading language modules... 10%");
+            language = Languages.getLanguageForShortCode("en-US"); // Get language from Languages class
+            if (language == null) {
+                throw new RuntimeException("Could not load American English language module.");
+            }
             loadingPage.progressBar.setValue(40);
-            loadingPage.loadingLabel.setText("Loading... 40%");
+            loadingPage.loadingLabel.setText("Initializing LanguageTool... 40%");
             langTool = new JLanguageTool(language);
             loadingPage.progressBar.setValue(80);
-            loadingPage.loadingLabel.setText("Loading... 80%");
-            matches = langTool.check("He are driving. The bird is also ftyling.");
+            loadingPage.loadingLabel.setText("Performing initial check... 80%");
+            matches = langTool.check("He are driving. The bird is also ftyling."); // Example check
             loadingPage.progressBar.setValue(100);
-            loadingPage.loadingLabel.setText("Loading... 100%");
+            loadingPage.loadingLabel.setText("Loading complete. Welcome!");
+            Thread.sleep(500); // Brief pause to show completion message
             switchPage(homePage);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Dito nageerror: " + e.getMessage(), "Error",
+            e.printStackTrace(); // Print stack trace for detailed debugging
+            JOptionPane.showMessageDialog(null, "Error during initialization: " + e.getMessage(), "Initialization Error",
                     JOptionPane.ERROR_MESSAGE);
+            // Consider exiting or disabling features if LanguageTool fails to load
+            System.exit(1); // Exit if critical component fails
         }
 
     }

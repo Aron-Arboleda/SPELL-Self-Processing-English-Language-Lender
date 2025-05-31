@@ -2,11 +2,11 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SPELL"
-#define MyAppVersion "1.0.1.3"
+#define MyAppVersion "1.2.5.1"
 #define MyAppPublisher "Aron-Arboleda"
 #define MyAppURL "https://github.com/Aron-Arboleda/SPELL-Self-Processing-English-Language-Lender"
 #define MyAppExeName "SPELL.exe"
-#define MyAppAssocName MyAppName + "_Setup_v1_0_1_3"
+#define MyAppAssocName MyAppName + "_Setup_v1.2.5.1"
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
@@ -24,12 +24,12 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
-LicenseFile=D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\LICENSE.txt
+LicenseFile=C:\Users\Aron Rez\OneDrive\Documents\Codes\Repositories\SPELL-Self-Processing-English-Language-Lender\LICENSE
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist
-OutputBaseFilename=SPELL_1.0.1.3_Installer
-SetupIconFile=D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\src\main\resources\images\SPELLLogo.ico
+OutputDir=C:\Users\Aron Rez\OneDrive\Documents\Codes\Repositories\SPELL-Self-Processing-English-Language-Lender\dist\setup
+OutputBaseFilename=SPELL_v1.2.5.1_Setup
+SetupIconFile=C:\Users\Aron Rez\OneDrive\Documents\Codes\Repositories\SPELL-Self-Processing-English-Language-Lender\src\main\resources\images\SPELLLogo.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -41,8 +41,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\target\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Documents\Codes\ProjectsRepositories\spell-self-processing-self-language-lender\dist\setup\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Aron Rez\OneDrive\Documents\Codes\Repositories\SPELL-Self-Processing-English-Language-Lender\dist\exe\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Aron Rez\OneDrive\Documents\Codes\Repositories\SPELL-Self-Processing-English-Language-Lender\target\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
