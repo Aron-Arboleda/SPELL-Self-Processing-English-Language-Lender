@@ -6,7 +6,6 @@
 
 ## Info
 
-- **Developer:** [Aron Arboleda](https://github.com/Aron-Arboleda) (Lead)
 - **Project Started:** May 2024
 - **License:** [LICENSE](./LICENSE)
 
@@ -64,15 +63,15 @@
 
 ## SPELL Team
 
+Developers:
+
+- [Aron](https://github.com/Aron-Arboleda)
+- [Hannah](https://github.com/404hannah)
+
 Front-end Designers:
 
 - [Lester](https://github.com/L-E-S-T-E-R)
 - [Alex](https://www.instagram.com/lexsusicat)
-
-Back-end Handlers:
-
-- [Aron](https://github.com/Aron-Arboleda)
-- [Hannah](https://github.com/404hannah)
 
 Documentation:
 
